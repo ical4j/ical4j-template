@@ -1,0 +1,127 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'pl.allegro.tech.build.axion-release' version '1.13.3'
+    id "nebula.provided-base" version "3.0.3"
+    id "biz.aQute.bnd.builder" version "$bndVersion"
+}
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'jacoco'
+apply plugin: 'signing'
+apply plugin: 'nebula.optional-base'
+
+group = 'org.mnode.ical4j'
+description = '''
+A collection of templates for popular calendar use-cases
+'''
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api "org.mnode.ical4j:ical4j:$ical4jVersion",
+            "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion"
+
+    implementation 'com.j2html:j2html:1.4.0'
+    
+    testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+
+    // spock
+    testImplementation platform("org.spockframework:spock-bom:2.0-M4-groovy-3.0"),
+            "org.spockframework:spock-core"
+
+    // logging
+    testImplementation "org.slf4j:slf4j-log4j12:$slf4jVersion",
+            "org.apache.logging.log4j:log4j:$log4jVersion"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava8Compatible()) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
+    options {
+        links 'https://docs.oracle.com/en/java/javase/11/docs/api/'
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+scmVersion {
+    tag {
+        prefix = 'ical4j-templates-'
+    }
+    versionCreator 'versionWithBranch'
+    branchVersionCreator = ['master': 'simple']
+}
+version = scmVersion.version
+
+ext {
+    isReleaseVersion = !version.endsWith("SNAPSHOT")
+}
+
+publishing {
+    publications {
+        ical4jTemplates(MavenPublication) {
+            from components.java
+            artifact javadocJar
+            artifact sourcesJar
+            pom.withXml {
+                asNode().appendNode('name', project.name)
+                asNode().appendNode('description', project.description)
+                asNode().appendNode('url', 'http://ical4j.github.io')
+
+                def scmNode = asNode().appendNode('scm')
+                scmNode.appendNode('url', 'https://github.com/ical4j/ical4j-templates')
+                scmNode.appendNode('connection', 'scm:git@github.com:ical4j/ical4j-templates.git')
+                scmNode.appendNode('developerConnection', 'scm:git@github.com:ical4j/ical4j-templates.git')
+
+                def licenseNode = asNode().appendNode('licenses').appendNode('license')
+                licenseNode.appendNode('name', 'iCal4j - License')
+                licenseNode.appendNode('url', 'https://raw.githubusercontent.com/ical4j/ical4j/master/LICENSE')
+                licenseNode.appendNode('distribution', 'repo')
+
+                def developerNode = asNode().appendNode('developers').appendNode('developer')
+                developerNode.appendNode('id', 'fortuna')
+                developerNode.appendNode('name', 'Ben Fortuna')
+            }
+        }
+    }
+}
+
+signing {
+    required { isReleaseVersion }
+    sign publishing.publications.ical4jTemplates
+}

@@ -13,19 +13,18 @@
 2. [Usage - How to use this library][Usage]
     - [Examples - common usage scenarios][Examples]
 
-## Introduction
+## Overview
 
-Whilst the icalendar specification may be used to describe just about any activity or event, typically there are some use-cases that are more widely used than others.
-
-Such use-cases may include birthdays and other anniversary-style observances, scheduling activities such as timetables and meetings, task management, and historical activities including recording of meeting minutes.
-
-ical4j-templates offers an opinionated view of how such popular activities may be structured, providing a simpler and consistent approach to time-based management.
+iCal4j Templates provide support for Calendar and Component prototyping and custom validation. A
+template may be defined programmatically or via a supported template definition file format.
 
 ## Usage
 
-This library is primarily based on the `Builder` pattern, whereby inputs are collected before generating iCalendar objects using the opinionated template.
+TBD.
 
 ### Examples
+
+TBD.
 
 #### Creating a Public Holiday
 

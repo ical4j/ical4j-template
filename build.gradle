@@ -18,7 +18,7 @@ apply plugin: 'jacoco'
 apply plugin: 'signing'
 apply plugin: 'nebula.optional-base'
 
-group = 'org.mnode.ical4j'
+group = 'org.ical4j'
 description = '''
 A collection of templates for popular calendar use-cases
 '''
@@ -32,7 +32,8 @@ repositories {
 
 dependencies {
     api "org.mnode.ical4j:ical4j:$ical4jVersion",
-            "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion"
+            "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion",
+            "org.mnode.ical4j:ical4j-serializer:$ical4jSerializerVersion"
 
     implementation 'com.j2html:j2html:1.4.0'
     

@@ -1,4 +1,4 @@
-package org.mnode.ical4j.template.property;
+package org.ical4j.template.property;
 
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.StructuredData;

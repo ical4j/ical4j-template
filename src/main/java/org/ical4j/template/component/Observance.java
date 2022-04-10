@@ -1,4 +1,4 @@
-package org.mnode.ical4j.template.component;
+package org.ical4j.template.component;
 
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.component.VEvent;

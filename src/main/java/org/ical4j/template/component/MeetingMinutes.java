@@ -1,9 +1,9 @@
-package org.mnode.ical4j.template.component;
+package org.ical4j.template.component;
 
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VJournal;
 import net.fortuna.ical4j.model.property.RelatedTo;
-import org.mnode.ical4j.template.property.MeetingAttendance;
+import org.ical4j.template.property.MeetingAttendance;
 
 import java.time.ZonedDateTime;
 

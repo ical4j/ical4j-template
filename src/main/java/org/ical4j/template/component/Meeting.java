@@ -1,4 +1,4 @@
-package org.mnode.ical4j.template.component;
+package org.ical4j.template.component;
 
 import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.Property;
@@ -7,7 +7,7 @@ import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.Organizer;
-import org.mnode.ical4j.template.property.MeetingAgenda;
+import org.ical4j.template.property.MeetingAgenda;
 
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;

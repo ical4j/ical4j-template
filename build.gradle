@@ -5,18 +5,17 @@ buildscript {
 }
 
 plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.13.3'
-    id "nebula.provided-base" version "3.0.3"
+    id 'java'
+    id 'java-library'
+    id 'groovy'
+    id 'maven-publish'
+    id 'jacoco'
+    id 'signing'
+    id "pl.allegro.tech.build.axion-release" version "1.13.6"
+    id "nebula.provided-base" version "7.0.0"
+    id "nebula.optional-base" version "7.0.0"
     id "biz.aQute.bnd.builder" version "$bndVersion"
 }
-
-apply plugin: 'java'
-apply plugin: 'java-library'
-apply plugin: 'groovy'
-apply plugin: 'maven-publish'
-apply plugin: 'jacoco'
-apply plugin: 'signing'
-apply plugin: 'nebula.optional-base'
 
 group = 'org.ical4j'
 description = '''
@@ -35,7 +34,7 @@ dependencies {
             "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion",
             "org.mnode.ical4j:ical4j-serializer:$ical4jSerializerVersion"
 
-    implementation 'com.j2html:j2html:1.4.0'
+    implementation "com.j2html:j2html:$j2htmlVersion"
     
     testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
 

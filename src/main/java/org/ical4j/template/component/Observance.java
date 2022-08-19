@@ -6,7 +6,7 @@ import net.fortuna.ical4j.model.property.RRule;
 
 import java.time.LocalDate;
 
-import static net.fortuna.ical4j.model.property.Transp.TRANSPARENT;
+import static net.fortuna.ical4j.model.property.immutable.ImmutableTransp.TRANSPARENT;
 
 /**
  * Creates an (optionally recurring) date-based {@link VEvent} representing a public holiday or

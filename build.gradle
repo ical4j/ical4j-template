@@ -32,7 +32,7 @@ repositories {
 dependencies {
     api "org.mnode.ical4j:ical4j:$ical4jVersion",
             "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion",
-            "org.mnode.ical4j:ical4j-serializer:$ical4jSerializerVersion"
+            "org.ical4j:ical4j-serializer:$ical4jSerializerVersion"
 
     implementation "com.j2html:j2html:$j2htmlVersion"
     

@@ -47,7 +47,7 @@ public class MeetingAgenda extends StructuredData {
         }
 
         @Override
-        public StyledDescription createProperty(final ParameterList parameters, final String value) throws URISyntaxException {
+        public StyledDescription createProperty(final ParameterList parameters, final String value) {
             return new StyledDescription(parameters, value);
         }
 

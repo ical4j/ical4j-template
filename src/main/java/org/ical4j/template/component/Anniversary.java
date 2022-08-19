@@ -4,11 +4,12 @@ import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.Recur;
+import net.fortuna.ical4j.model.component.VAlarm;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.RRule;
 import net.fortuna.ical4j.model.property.Summary;
-import net.fortuna.ical4j.model.property.Transp;
+import net.fortuna.ical4j.model.property.immutable.ImmutableTransp;
 import net.fortuna.ical4j.transform.recurrence.Frequency;
 
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class Anniversary extends VEvent {
         public VEvent createComponent() {
             List<Property> props = Arrays.asList(
                     new RRule<>(new Recur.Builder<LocalDate>().frequency(Frequency.YEARLY).build()),
-                    Transp.TRANSPARENT);
+                    ImmutableTransp.TRANSPARENT);
             return super.createComponent(new PropertyList(props));
         }
 
@@ -45,7 +46,7 @@ public class Anniversary extends VEvent {
         public VEvent createComponent(PropertyList properties) {
             PropertyList props = (PropertyList) properties.add(new RRule<>(
                     new Recur.Builder<LocalDate>().frequency(Frequency.YEARLY).build()))
-                    .add(Transp.TRANSPARENT);
+                    .add(ImmutableTransp.TRANSPARENT);
             return super.createComponent(props);
         }
 
@@ -53,8 +54,8 @@ public class Anniversary extends VEvent {
         public VEvent createComponent(PropertyList properties, ComponentList<?> subComponents) {
             PropertyList props = (PropertyList) properties.add(new RRule<>(
                     new Recur.Builder<LocalDate>().frequency(Frequency.YEARLY).build()))
-                    .add(Transp.TRANSPARENT);
-            return super.createComponent(props, subComponents);
+                    .add(ImmutableTransp.TRANSPARENT);
+            return new VEvent(properties, (ComponentList<VAlarm>) subComponents);
         }
     }
 }

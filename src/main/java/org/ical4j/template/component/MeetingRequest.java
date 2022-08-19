@@ -4,9 +4,11 @@ import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.Recur;
+import net.fortuna.ical4j.model.component.VAlarm;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.Organizer;
+import net.fortuna.ical4j.model.property.immutable.ImmutableMethod;
 import org.ical4j.template.property.MeetingAgenda;
 
 import java.net.URISyntaxException;
@@ -15,12 +17,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.fortuna.ical4j.model.property.Transp.OPAQUE;
+import static net.fortuna.ical4j.model.property.immutable.ImmutableTransp.OPAQUE;
 
 /**
  * Creates a {@link VEvent} representing a meeting of one or more attendees.
  */
-public class Meeting extends Appointment {
+public class MeetingRequest extends Appointment {
 
     private String title;
 
@@ -32,12 +34,16 @@ public class Meeting extends Appointment {
 
     private Recur recurrence;
 
-    public Meeting withAttendee(String attendee) throws URISyntaxException {
+    public MeetingRequest() {
+        add(ImmutableMethod.REQUEST);
+    }
+
+    public MeetingRequest withAttendee(String attendee) throws URISyntaxException {
         add(new Attendee(attendee));
         return this;
     }
 
-    public Meeting withAgenda(MeetingAgenda agenda) {
+    public MeetingRequest withAgenda(MeetingAgenda agenda) {
         return withAgenda(agenda, true);
     }
 
@@ -48,7 +54,7 @@ public class Meeting extends Appointment {
      * @param deriveDescription
      * @return
      */
-    public Meeting withAgenda(MeetingAgenda agenda, boolean deriveDescription) {
+    public MeetingRequest withAgenda(MeetingAgenda agenda, boolean deriveDescription) {
         add(agenda);
         if (deriveDescription) {
             add(agenda.newDescriptionFactory().createProperty());
@@ -57,7 +63,7 @@ public class Meeting extends Appointment {
         return this;
     }
 
-    public static class Factory extends VEvent.Factory {
+    public static class Factory extends Appointment.Factory {
         @Override
         public VEvent createComponent() {
             List<Property> props = Collections.singletonList(OPAQUE);
@@ -73,7 +79,7 @@ public class Meeting extends Appointment {
         @Override
         public VEvent createComponent(PropertyList properties, ComponentList<?> subComponents) {
             PropertyList props = (PropertyList) properties.add(OPAQUE);
-            return super.createComponent(props, subComponents);
+            return new VEvent(properties, (ComponentList<VAlarm>) subComponents);
         }
     }
 }

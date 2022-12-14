@@ -1,4 +1,4 @@
-package org.ical4j.template.component;
+package org.ical4j.template.vjournal;
 
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;

@@ -1,4 +1,4 @@
-package org.ical4j.template.component;
+package org.ical4j.template.vevent;
 
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -12,7 +12,7 @@ import static net.fortuna.ical4j.model.property.immutable.ImmutableTransp.TRANSP
  * Creates an (optionally recurring) date-based {@link VEvent} representing a public holiday or
  * other observance.
  */
-public class Observance extends VEvent {
+public class Observance {
 
     private String title;
 

@@ -27,6 +27,9 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
 }
 
 dependencies {
@@ -47,6 +50,10 @@ dependencies {
             "org.apache.logging.log4j:log4j:$log4jVersion"
 }
 
+test {
+    useJUnitPlatform()
+}
+
 jacocoTestReport {
     reports {
         xml.enabled true
@@ -60,6 +67,25 @@ javadoc {
     }
     options {
         links 'https://docs.oracle.com/en/java/javase/11/docs/api/'
+    }
+}
+
+scmVersion {
+    tag {
+        prefix = 'ical4j-templates-'
+    }
+    versionCreator 'versionWithBranch'
+    branchVersionCreator = ['master': 'simple']
+}
+version = scmVersion.version
+
+jar {
+    manifest {
+        attributes (
+                'Implementation-Title': 'iCal4j Templates',
+                'Implementation-Version': version,
+                'Implementation-Vendor': 'Ben Fortuna'
+        )
     }
 }
 
@@ -78,15 +104,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
-scmVersion {
-    tag {
-        prefix = 'ical4j-templates-'
-    }
-    versionCreator 'versionWithBranch'
-    branchVersionCreator = ['master': 'simple']
-}
-version = scmVersion.version
 
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT")

@@ -12,7 +12,6 @@ plugins {
     id 'jacoco'
     id 'signing'
     id "pl.allegro.tech.build.axion-release" version "1.13.6"
-    id "nebula.provided-base" version "7.0.0"
     id "nebula.optional-base" version "7.0.0"
     id "biz.aQute.bnd.builder" version "$bndVersion"
 }
@@ -22,14 +21,19 @@ description = '''
 A collection of templates for popular calendar use-cases
 '''
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+//sourceCompatibility = 11
+//targetCompatibility = 11
 
 repositories {
     mavenCentral()
     maven {
-        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        url 'https://s01.oss.sonatype.org/content/repositories/snapshots'
     }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 dependencies {
@@ -38,7 +42,7 @@ dependencies {
             "org.ical4j:ical4j-serializer:$ical4jSerializerVersion"
 
     implementation "com.j2html:j2html:$j2htmlVersion"
-    
+
     testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
 
     // spock
@@ -89,22 +93,6 @@ jar {
     }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier.set('javadoc')
-    from 'build/docs/javadoc'
-}
-
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    archiveClassifier.set('sources')
-}
-
-artifacts {
-    archives jar
-    archives javadocJar
-    archives sourcesJar
-}
-
 ext {
     isReleaseVersion = !version.endsWith("SNAPSHOT")
 }
@@ -113,8 +101,6 @@ publishing {
     publications {
         ical4jTemplates(MavenPublication) {
             from components.java
-            artifact javadocJar
-            artifact sourcesJar
             pom.withXml {
                 asNode().appendNode('name', project.name)
                 asNode().appendNode('description', project.description)

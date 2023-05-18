@@ -3,16 +3,19 @@ include .env
 
 NEXT_VERSION=$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
-.PHONY: all gradlew clean build currentVersion markNextVersion \
+.PHONY: all gradlew clean check build currentVersion markNextVersion \
 	verify release publish
 
-all: test
+all: check
 
 gradlew:
 	./gradlew wrapper --gradle-version=$(GRADLE_VERSION) --distribution-type=bin
 
 clean:
 	./gradlew clean
+
+check:
+	./gradlew check
 
 test:
 	./gradlew test

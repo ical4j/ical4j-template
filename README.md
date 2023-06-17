@@ -1,27 +1,17 @@
 # iCal4j Templates
 
-A collection of data templates for popular calendar use-cases
+A decorator layer on iCalendar and vCard for common use-cases
 
 ## Overview
 
-iCal4j Templates provide support for data prototyping and validation based on the iCalendar and vCard standard.
-Often we spend a considerable amount of time defining data models and validation for entities and relationships
-that are commonly modeled time and time again. This library demonstrates that we can often use the same models
-for different applications via the concept of data polymorphism.
+iCal4j Templates is designed to make the iCalendar and vCard specifications more accessible by providing a
+discoverable API for common applications.
 
-### Data Polymorphism
+For example, a simple meeting or task may not require the full functionality provided by the iCalendar specification,
+but you still need to understand all of it in order to produce valid content.
 
-You may be familiar with Polymorphism as one of the key pillars of the Object-oriented Paradigm. This is where an
-object may assume multiple forms simultaneously, such that we can group and operate on them in different contexts.
-
-Data Polymorphism allows us to represent and manipulate data differently depending on the context, which can
-increase both the longevity and usefulness of our data, with potential to be shared across different applications
-and contexts.
-
-This project provides concrete implementations of well-known data types that can be modeled using iCalendar and
-vCard objects. Typically, this will include most temporal-based definitions (e.g. events, tasks, etc.) and other
-entities such as people, products and services.
-
+This library aims to make it easier to construct valid iCalendar and vCard content without needing to read the
+specifications in full.
 
 ## Usage
 

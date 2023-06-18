@@ -27,6 +27,9 @@ A collection of templates for popular calendar use-cases
 repositories {
     mavenCentral()
     maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+    maven {
         url 'https://s01.oss.sonatype.org/content/repositories/snapshots'
     }
 }

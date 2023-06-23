@@ -17,6 +17,8 @@ public class ComponentType extends Categories implements ImmutableProperty {
 
     public static final ComponentType TASK = new ComponentType("TASK");
 
+    public static final ComponentType REMINDER = new ComponentType("REMINDER");
+
     public ComponentType(String type) {
         super(new TextList(type));
     }

@@ -7,37 +7,37 @@ import org.threeten.extra.Minutes;
 
 import java.time.Duration;
 
+import static org.ical4j.template.property.Notify.Relative.*;
+
 public class Notify extends Trigger {
 
-    public static final Notify ON_START = new Notify().afterStart(Duration.ZERO);
+    public static final Notify ON_START = new Notify(Duration.ZERO, AfterStart);
     
-    public static final Notify ON_END = new Notify().afterEnd(Duration.ZERO);
+    public static final Notify ON_END = new Notify(Duration.ZERO, AfterEnd);
 
-    public static final Notify ONE_HOUR_BEFORE_START = new Notify().beforeStart(Hours.of(1).toDuration());
+    public static final Notify ONE_HOUR_BEFORE_START = new Notify(Hours.of(1).toDuration(), BeforeStart);
 
-    public static final Notify FIVE_MINUTES_BEFORE_END = new Notify().beforeEnd(Minutes.of(5).toDuration());
+    public static final Notify FIVE_MINUTES_BEFORE_END = new Notify(Minutes.of(5).toDuration(), BeforeEnd);
 
-    public Notify beforeStart(Duration duration) {
-        replace(Related.START);
-        setDuration(duration.negated());
-        return this;
-    }
+    public enum Relative { BeforeStart, AfterStart, BeforeEnd, AfterEnd }
 
-    public Notify afterStart(Duration duration) {
-        replace(Related.START);
-        setDuration(duration);
-        return this;
-    }
-
-    public Notify beforeEnd(Duration duration) {
-        replace(Related.END);
-        setDuration(duration.negated());
-        return this;
-    }
-
-    public Notify afterEnd(Duration duration) {
-        replace(Related.END);
-        setDuration(duration);
-        return this;
+    public Notify(Duration duration, Relative relative) {
+        switch (relative) {
+            case BeforeStart:
+                replace(Related.START);
+                setDuration(duration.negated());
+                break;
+            case AfterStart:
+                replace(Related.START);
+                setDuration(duration);
+                break;
+            case BeforeEnd:
+                replace(Related.END);
+                setDuration(duration.negated());
+                break;
+            case AfterEnd:
+                replace(Related.END);
+                setDuration(duration);
+        }
     }
 }

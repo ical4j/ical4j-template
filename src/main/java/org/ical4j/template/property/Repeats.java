@@ -55,7 +55,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Years interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.YEARLY)
+        this(new Recur.Builder<>().frequency(Frequency.YEARLY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -64,7 +64,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Months interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.MONTHLY)
+        this(new Recur.Builder<>().frequency(Frequency.MONTHLY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -73,7 +73,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Weeks interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.WEEKLY)
+        this(new Recur.Builder<>().frequency(Frequency.WEEKLY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -82,7 +82,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Days interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.DAILY)
+        this(new Recur.Builder<>().frequency(Frequency.DAILY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -91,7 +91,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Hours interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.HOURLY)
+        this(new Recur.Builder<>().frequency(Frequency.HOURLY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -100,7 +100,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Minutes interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.MINUTELY)
+        this(new Recur.Builder<>().frequency(Frequency.MINUTELY)
                 .interval(interval.getAmount()).build());
     }
 
@@ -109,8 +109,12 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param interval
      */
     public Repeats(Seconds interval) {
-        setRecur(new Recur.Builder<>(getRecur()).frequency(Frequency.SECONDLY)
+        this(new Recur.Builder<>().frequency(Frequency.SECONDLY)
                 .interval(interval.getAmount()).build());
+    }
+
+    private Repeats(Recur<?> recur) {
+        setRecur(recur);
     }
 
     /**
@@ -118,9 +122,8 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param day
      */
     public Repeats<T> on(DayOfWeek... day) {
-        setRecur(new Recur.Builder<>(getRecur()).dayList(Arrays.stream(day).map(WeekDay::getWeekDay)
+        return new Repeats<>(new Recur.Builder<>(getRecur()).dayList(Arrays.stream(day).map(WeekDay::getWeekDay)
                 .collect(Collectors.toList())).build());
-        return this;
     }
 
     /**
@@ -128,15 +131,13 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @param dayOfMonth
      */
     public Repeats<T> on(Integer... dayOfMonth) {
-        setRecur(new Recur.Builder<>(getRecur()).monthDayList(Arrays.asList(dayOfMonth)).build());
-        return this;
+        return new Repeats<>(new Recur.Builder<>(getRecur()).monthDayList(Arrays.asList(dayOfMonth)).build());
     }
 
     public Repeats<T> on(Month... month) {
-        setRecur(new Recur.Builder<>(getRecur()).monthList(Arrays.stream(month)
+        return new Repeats<>(new Recur.Builder<>(getRecur()).monthList(Arrays.stream(month)
                 .map(m -> net.fortuna.ical4j.model.Month.valueOf(m.getValue()))
                         .collect(Collectors.toList())).build());
-        return this;
     }
 
     /**
@@ -145,8 +146,7 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @return
      */
     public Repeats<T> until(T endDate) {
-        setRecur(new Recur.Builder<>(getRecur()).until(endDate).build());
-        return this;
+        return new Repeats<>(new Recur.Builder<>(getRecur()).until(endDate).build());
     }
 
     /**
@@ -155,7 +155,6 @@ public class Repeats<T extends Temporal> extends RRule<T> {
      * @return
      */
     public Repeats<T> times(int count) {
-        setRecur(new Recur.Builder<>(getRecur()).count(count).build());
-        return this;
+        return new Repeats<>(new Recur.Builder<>(getRecur()).count(count).build());
     }
 }

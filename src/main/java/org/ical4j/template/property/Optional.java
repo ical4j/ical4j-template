@@ -3,9 +3,8 @@ package org.ical4j.template.property;
 import net.fortuna.ical4j.model.component.Participant;
 import net.fortuna.ical4j.model.parameter.Role;
 import net.fortuna.ical4j.model.property.Attendee;
-import net.fortuna.ical4j.vcard.PropertyName;
 import net.fortuna.ical4j.vcard.VCard;
-import net.fortuna.ical4j.vcard.property.CalAdrUri;
+import org.ical4j.template.participant.InactiveRole;
 
 import java.net.URI;
 
@@ -17,9 +16,8 @@ public class Optional extends Attendee {
     }
 
     public Optional(VCard card) {
+        super(new InactiveRole(card));
         add(Role.OPT_PARTICIPANT);
-        CalAdrUri uri = card.getRequiredProperty(PropertyName.CALADRURI.toString());
-        setCalAddress(uri.getUri());
     }
 
     public Optional(Participant participant) {

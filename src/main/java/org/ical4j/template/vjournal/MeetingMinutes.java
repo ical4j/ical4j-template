@@ -4,8 +4,9 @@ import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VJournal;
 import net.fortuna.ical4j.model.component.VToDo;
+import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.RelatedTo;
-import org.ical4j.template.property.MeetingAttendance;
+import net.fortuna.ical4j.model.property.Summary;
 
 import java.time.ZonedDateTime;
 
@@ -14,19 +15,20 @@ import java.time.ZonedDateTime;
  */
 public class MeetingMinutes extends VJournal {
 
-    private String title;
-
-    private ZonedDateTime dateTime;
+    public MeetingMinutes(String title, ZonedDateTime dateTime) {
+        add(new Summary(title));
+        add(new DtStart<>(dateTime));
+    }
 
     MeetingMinutes withMeeting(VEvent meeting) {
         add(new RelatedTo(meeting.getRequiredProperty(Property.UID).getValue()));
         return this;
     }
 
-    MeetingMinutes withMeetingAttendance(MeetingAttendance attendance) {
-        add(attendance);
-        return this;
-    }
+//    MeetingMinutes withMeetingAttendance(Attendance attendance) {
+//        add(attendance);
+//        return this;
+//    }
 
     MeetingMinutes withAction(VToDo action) {
         add(new RelatedTo(action.getRequiredProperty(Property.UID).getValue()));

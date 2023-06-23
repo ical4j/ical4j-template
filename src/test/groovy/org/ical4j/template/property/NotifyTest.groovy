@@ -3,7 +3,7 @@ package org.ical4j.template.property
 import org.threeten.extra.Minutes
 import spock.lang.Specification
 
-import java.time.Duration
+import static org.ical4j.template.property.Notify.Relative.BeforeStart
 
 class NotifyTest extends Specification {
 
@@ -13,6 +13,6 @@ class NotifyTest extends Specification {
 
         where:
         trigger                                                 | expectedValue
-        new Notify().beforeStart(Minutes.of(10).toDuration())   | 'TRIGGER;RELATED=START;VALUE=DURATION:-PT10M\r\n'
+        new Notify(Minutes.of(10).toDuration(), BeforeStart) | 'TRIGGER;RELATED=START;VALUE=DURATION:-PT10M\r\n'
     }
 }

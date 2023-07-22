@@ -1,27 +1,37 @@
 package org.ical4j.template.vjournal;
 
 import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VJournal;
 import net.fortuna.ical4j.model.component.VToDo;
+import net.fortuna.ical4j.model.property.DtStamp;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.RelatedTo;
 import net.fortuna.ical4j.model.property.Summary;
+import net.fortuna.ical4j.util.RandomUidGenerator;
+import org.ical4j.template.AbstractCalendarTemplate;
 
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 
 /**
  * Creates a non-recurring {@link VJournal} representing an event in the past.
  */
-public class MeetingMinutes extends VJournal {
+public class MeetingMinutes extends AbstractCalendarTemplate<VJournal> {
 
     public MeetingMinutes(String title, ZonedDateTime dateTime) {
-        add(new Summary(title));
-        add(new DtStart<>(dateTime));
+        super(new VJournal(new PropertyList(Arrays.asList(new RandomUidGenerator().generateUid(),
+                new DtStamp(), new Summary(title), new DtStart<>(dateTime)))));
+    }
+
+    @Override
+    public <T extends AbstractCalendarTemplate<VJournal>> T getFluentTarget() {
+        return (T) this;
     }
 
     MeetingMinutes withMeeting(VEvent meeting) {
-        add(new RelatedTo(meeting.getRequiredProperty(Property.UID).getValue()));
+        getRevisions().getLatestRevision().add(new RelatedTo(meeting.getRequiredProperty(Property.UID).getValue()));
         return this;
     }
 
@@ -31,7 +41,7 @@ public class MeetingMinutes extends VJournal {
 //    }
 
     MeetingMinutes withAction(VToDo action) {
-        add(new RelatedTo(action.getRequiredProperty(Property.UID).getValue()));
+        getRevisions().getLatestRevision().add(new RelatedTo(action.getRequiredProperty(Property.UID).getValue()));
         return this;
     }
 }

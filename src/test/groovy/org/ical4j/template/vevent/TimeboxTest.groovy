@@ -18,13 +18,17 @@ class TimeboxTest extends Specification {
                 .repeats(new Repeats(Weeks.of(2)))
 
         then: 'the event matches expected value'
-        iteration as String ==~ /(?m)BEGIN:VEVENT\r
+        iteration as String ==~ /(?m)BEGIN:VCALENDAR\r
+CALSCALE:GREGORIAN\r
+VERSION:2.0\r
+BEGIN:VEVENT\r
 DTSTAMP:\d{8}T\d{6}Z\r
 TRANSP:TRANSPARENT\r
 SUMMARY:Two week iteration\r
 DTSTART;VALUE=DATE:20221226\r
 DURATION:P2W\r
 RRULE:FREQ=WEEKLY;INTERVAL=2\r
-END:VEVENT\r\n/
+END:VEVENT\r
+END:VCALENDAR\r\n/
     }
 }

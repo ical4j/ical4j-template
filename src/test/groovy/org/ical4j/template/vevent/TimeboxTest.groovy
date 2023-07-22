@@ -22,6 +22,7 @@ class TimeboxTest extends Specification {
 CALSCALE:GREGORIAN\r
 VERSION:2.0\r
 BEGIN:VEVENT\r
+UID:.+\r
 DTSTAMP:\d{8}T\d{6}Z\r
 TRANSP:TRANSPARENT\r
 SUMMARY:Two week iteration\r

@@ -16,8 +16,7 @@ public class Optional extends Attendee {
     }
 
     public Optional(VCard card) {
-        super(new InactiveRole(card));
-        add(Role.OPT_PARTICIPANT);
+        this(new InactiveRole(card));
     }
 
     public Optional(Participant participant) {

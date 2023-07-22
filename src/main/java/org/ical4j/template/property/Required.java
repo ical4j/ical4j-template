@@ -16,8 +16,7 @@ public class Required extends Attendee {
     }
 
     public Required(VCard card) {
-        super(new ActiveRole(card));
-        add(Role.REQ_PARTICIPANT);
+        this(new ActiveRole(card));
     }
 
     public Required(Participant participant) {

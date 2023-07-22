@@ -16,8 +16,7 @@ public class Chair extends Attendee {
     }
 
     public Chair(VCard card) {
-        super(new ActiveRole(card));
-        add(Role.CHAIR);
+        this(new ActiveRole(card));
     }
 
     public Chair(Participant participant) {

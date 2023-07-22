@@ -24,19 +24,19 @@ public class Notify extends Trigger {
     public Notify(Duration duration, Relative relative) {
         switch (relative) {
             case BeforeStart:
-                replace(Related.START);
+                add(Related.START);
                 setDuration(duration.negated());
                 break;
             case AfterStart:
-                replace(Related.START);
+                add(Related.START);
                 setDuration(duration);
                 break;
             case BeforeEnd:
-                replace(Related.END);
+                add(Related.END);
                 setDuration(duration.negated());
                 break;
             case AfterEnd:
-                replace(Related.END);
+                add(Related.END);
                 setDuration(duration);
         }
     }

@@ -2,25 +2,26 @@ package org.ical4j.template.property;
 
 import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.TextList;
 import net.fortuna.ical4j.model.property.Categories;
+import net.fortuna.ical4j.model.property.Concept;
 import net.fortuna.ical4j.model.property.ImmutableProperty;
+
+import java.net.URI;
 
 /**
  * Use the {@link Categories} property to define common types of components.
  */
-public class ComponentType extends Categories implements ImmutableProperty {
+public class EventType extends Concept implements ImmutableProperty {
 
-    public static final ComponentType MEETING = new ComponentType("MEETING");
+    public static final EventType MEETING = new EventType("https://ical4j.org/event-types/MEETING");
 
-    public static final ComponentType APPOINTMENT = new ComponentType("APPOINTMENT");
+    public static final EventType APPOINTMENT = new EventType("https://ical4j.org/event-types/APPOINTMENT");
 
-    public static final ComponentType TASK = new ComponentType("TASK");
+    public static final EventType REMINDER = new EventType("https://ical4j.org/event-types/REMINDER");
+    public static final EventType PERFORMANCE = new EventType("https://ical4j.org/event-types/PERFORMANCE");
 
-    public static final ComponentType REMINDER = new ComponentType("REMINDER");
-
-    public ComponentType(String type) {
-        super(new TextList(type));
+    public EventType(String type) {
+        super(URI.create(type));
     }
 
     @Override

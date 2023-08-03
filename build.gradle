@@ -79,7 +79,7 @@ javadoc {
 
 scmVersion {
     tag {
-        prefix = 'ical4j-templates-'
+        prefix = 'ical4j-template-'
     }
     versionCreator 'versionWithBranch'
     branchVersionCreator = ['master': 'simple']
@@ -89,7 +89,7 @@ version = scmVersion.version
 jar {
     manifest {
         attributes (
-                'Implementation-Title': 'iCal4j Templates',
+                'Implementation-Title': 'iCal4j Template',
                 'Implementation-Version': version,
                 'Implementation-Vendor': 'Ben Fortuna'
         )
@@ -110,9 +110,9 @@ publishing {
                 asNode().appendNode('url', 'http://ical4j.github.io')
 
                 def scmNode = asNode().appendNode('scm')
-                scmNode.appendNode('url', 'https://github.com/ical4j/ical4j-templates')
-                scmNode.appendNode('connection', 'scm:git@github.com:ical4j/ical4j-templates.git')
-                scmNode.appendNode('developerConnection', 'scm:git@github.com:ical4j/ical4j-templates.git')
+                scmNode.appendNode('url', 'https://github.com/ical4j/ical4j-template')
+                scmNode.appendNode('connection', 'scm:git@github.com:ical4j/ical4j-template.git')
+                scmNode.appendNode('developerConnection', 'scm:git@github.com:ical4j/ical4j-template.git')
 
                 def licenseNode = asNode().appendNode('licenses').appendNode('license')
                 licenseNode.appendNode('name', 'iCal4j - License')
@@ -125,6 +125,17 @@ publishing {
             }
         }
     }
+
+    repositories {
+            maven {
+                name = "OSSRH"
+                url = version.endsWith('SNAPSHOT') ? "https://s01.oss.sonatype.org/content/repositories/snapshots/" : "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username = System.getenv("MAVEN_USERNAME")
+                    password = System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
 }
 
 signing {

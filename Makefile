@@ -23,6 +23,10 @@ test:
 build:
 	./gradlew build
 
+changelog:
+	git log "$(CHANGELOG_START_TAG)...$(CHANGELOG_END_TAG)" \
+    	--pretty=format:'* %s [View commit](http://github.com/ical4j/ical4j-template/commit/%H)' --reverse | grep -v Merge
+
 currentVersion:
 	./gradlew -q currentVersion
 

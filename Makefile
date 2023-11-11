@@ -33,6 +33,9 @@ currentVersion:
 markNextVersion:
 	./gradlew markNextVersion -Prelease.version=$(NEXT_VERSION)
 
+install:
+	./gradlew publishToMavenLocal
+
 verify:
 	./gradlew verify
 

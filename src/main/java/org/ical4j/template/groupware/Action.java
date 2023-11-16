@@ -1,13 +1,16 @@
 package org.ical4j.template.groupware;
 
 import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.component.Participant;
 import net.fortuna.ical4j.model.component.VToDo;
+import net.fortuna.ical4j.model.property.Due;
+import net.fortuna.ical4j.model.property.RelatedTo;
+import net.fortuna.ical4j.model.property.Summary;
 import org.ical4j.template.AbstractTemplate;
+import org.ical4j.template.ComponentContainerSupport;
+import org.ical4j.template.PropertyContainerSupport;
 
-import java.time.LocalDate;
-import java.time.temporal.TemporalAmount;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.temporal.Temporal;
 
 /**
  * This represents an action undertaken by an actor in response to a related component.
@@ -15,11 +18,16 @@ import java.util.List;
  *
  * See: <a href="https://schema.org/Action">Action</a>
  */
-public class Action extends AbstractTemplate<VToDo> {
+public class Action extends AbstractTemplate<VToDo> implements PropertyContainerSupport<VToDo>,
+        ComponentContainerSupport<Component, VToDo> {
 
-    private LocalDate due;
+    private Participant participant;
 
-    private List<Component> dependencies = new ArrayList<>();
+    private Summary summary;
+
+    private RelatedTo context;
+
+    private Due<?> due;
 
     public Action() {
         super(VToDo.class);
@@ -29,23 +37,27 @@ public class Action extends AbstractTemplate<VToDo> {
         super(typeClass);
     }
 
-    public Action due(LocalDate due) {
-        this.due = due;
+    public Action participant(Participant participant) {
+        this.participant = participant;
         return this;
     }
 
-    public Action due(TemporalAmount due) {
-        this.due = LocalDate.now().plus(due);
+    public Action summary(String summary) {
+        this.summary = new Summary(summary);
         return this;
     }
 
-    public Action dependsOn(Component component) {
-        dependencies.add(component);
+    public Action due(Temporal due) {
+        this.due = new Due<>(due);
         return this;
     }
 
     @Override
     public VToDo apply(VToDo vToDo) {
+        addIfNotNull(vToDo, participant);
+        addIfNotNull(vToDo, summary);
+        addIfNotNull(vToDo, context);
+        addIfNotNull(vToDo, due);
         return vToDo;
     }
 }

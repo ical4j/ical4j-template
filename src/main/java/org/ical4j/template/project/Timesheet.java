@@ -9,8 +9,13 @@ public class Timesheet extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Timesheet(Class<VJournal> typeClass) {
+    public Timesheet(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Timesheet(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

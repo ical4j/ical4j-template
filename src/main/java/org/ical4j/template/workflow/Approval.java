@@ -12,8 +12,13 @@ public class Approval extends AbstractTemplate<VToDo> {
         super(VToDo.class);
     }
 
-    public Approval(Class<VToDo> typeClass) {
+    public Approval(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Approval(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

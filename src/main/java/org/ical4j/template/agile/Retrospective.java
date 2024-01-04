@@ -11,18 +11,23 @@ import java.util.List;
  */
 public class Retrospective extends AbstractTemplate<VToDo> {
 
-    private List<String> working = new ArrayList<>();
+    private List<VToDo> working = new ArrayList<>();
 
-    private List<String> notWorking = new ArrayList<>();
+    private List<VToDo> notWorking = new ArrayList<>();
     
-    private List<String> confusing = new ArrayList<>();
+    private List<VToDo> confusing = new ArrayList<>();
 
     public Retrospective() {
         super(VToDo.class);
     }
 
-    public Retrospective(Class<VToDo> typeClass) {
+    public Retrospective(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Retrospective(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

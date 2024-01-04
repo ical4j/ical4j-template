@@ -22,8 +22,13 @@ public class Workspace extends AbstractTemplate<VCard> {
         super(VCard.class);
     }
 
-    public Workspace(Class<VCard> typeClass) {
+    public Workspace(Class<? extends VCard> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VCard> Workspace(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     public Workspace title(String title) {

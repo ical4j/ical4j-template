@@ -27,8 +27,13 @@ public class Risk extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Risk(Class<VJournal> typeClass) {
+    public Risk(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Risk(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

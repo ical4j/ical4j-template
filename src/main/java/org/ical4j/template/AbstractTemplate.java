@@ -10,10 +10,20 @@ import java.util.function.UnaryOperator;
  */
 public abstract class AbstractTemplate<T> implements UnaryOperator<T> {
 
-    private final Class<T> typeClass;
+    private final Class<? extends T> typeClass;
 
-    public AbstractTemplate(Class<T> typeClass) {
+    private T prototype;
+
+    public AbstractTemplate(Class<? extends T> typeClass) {
         this.typeClass = typeClass;
+    }
+
+    public T getPrototype() {
+        return prototype;
+    }
+
+    public void setPrototype(T prototype) {
+        this.prototype = prototype;
     }
 
     public T apply() throws NoSuchMethodException, InvocationTargetException, InstantiationException,

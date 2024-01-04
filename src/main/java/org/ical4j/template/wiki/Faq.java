@@ -9,8 +9,13 @@ public class Faq extends AbstractTemplate<VToDo> {
         super(VToDo.class);
     }
 
-    public Faq(Class<VToDo> typeClass) {
+    public Faq(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Faq(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

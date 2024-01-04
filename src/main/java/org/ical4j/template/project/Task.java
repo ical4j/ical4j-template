@@ -9,8 +9,13 @@ public class Task extends AbstractTemplate<VToDo> {
         super(VToDo.class);
     }
 
-    public Task(Class<VToDo> typeClass) {
+    public Task(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Task(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

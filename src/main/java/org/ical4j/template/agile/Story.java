@@ -1,5 +1,6 @@
 package org.ical4j.template.agile;
 
+import net.fortuna.ical4j.model.component.VJournal;
 import net.fortuna.ical4j.model.component.VToDo;
 import org.ical4j.template.AbstractTemplate;
 
@@ -8,12 +9,19 @@ import org.ical4j.template.AbstractTemplate;
  */
 public class Story extends AbstractTemplate<VToDo> {
 
+    private VJournal criteria;
+    
     public Story() {
         super(VToDo.class);
     }
 
-    public Story(Class<VToDo> typeClass) {
+    public Story(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Story(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

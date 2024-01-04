@@ -1,6 +1,7 @@
 package org.ical4j.template.agile;
 
 import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VToDo;
 import org.ical4j.template.AbstractTemplate;
 
 /**
@@ -8,12 +9,19 @@ import org.ical4j.template.AbstractTemplate;
  */
 public class Sprint extends AbstractTemplate<VEvent> {
 
+    private VToDo backlog;
+
     public Sprint() {
         super(VEvent.class);
     }
 
-    public Sprint(Class<VEvent> typeClass) {
+    public Sprint(Class<? extends VEvent> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VEvent> Sprint(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

@@ -9,8 +9,13 @@ public class Definition extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Definition(Class<VJournal> typeClass) {
+    public Definition(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Definition(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

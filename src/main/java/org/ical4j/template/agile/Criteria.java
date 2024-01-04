@@ -12,8 +12,13 @@ public class Criteria extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Criteria(Class<VJournal> typeClass) {
+    public Criteria(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Criteria(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

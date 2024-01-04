@@ -9,8 +9,13 @@ public class Objective extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Objective(Class<VJournal> typeClass) {
+    public Objective(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Objective(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

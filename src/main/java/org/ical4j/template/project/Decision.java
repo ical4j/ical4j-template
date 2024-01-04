@@ -29,8 +29,13 @@ public class Decision extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Decision(Class<VJournal> typeClass) {
+    public Decision(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Decision(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

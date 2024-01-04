@@ -9,8 +9,13 @@ public class Roster extends AbstractTemplate<VAvailability> {
         super(VAvailability.class);
     }
 
-    public Roster(Class<VAvailability> typeClass) {
+    public Roster(Class<? extends VAvailability> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VAvailability> Roster(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

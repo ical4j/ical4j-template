@@ -1,11 +1,12 @@
 package org.ical4j.template.groupware;
 
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.DtStart;
 import org.ical4j.template.AbstractTemplate;
 
 import java.net.URISyntaxException;
 import java.time.ZonedDateTime;
+
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DTSTART;
 
 public class Appointment extends AbstractTemplate<VEvent> {
 
@@ -15,8 +16,13 @@ public class Appointment extends AbstractTemplate<VEvent> {
         super(VEvent.class);
     }
 
-    public Appointment(Class<VEvent> typeClass) {
+    public Appointment(Class<? extends VEvent> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VEvent> Appointment(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     public Appointment start(ZonedDateTime start) {
@@ -26,7 +32,7 @@ public class Appointment extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
-        vEvent.replace(new DtStart<>(start));
+        vEvent.with(DTSTART, start);
         return vEvent;
     }
 

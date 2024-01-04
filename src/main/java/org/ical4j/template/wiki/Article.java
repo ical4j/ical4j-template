@@ -12,8 +12,13 @@ public class Article extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Article(Class<VJournal> typeClass) {
+    public Article(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Article(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     @Override

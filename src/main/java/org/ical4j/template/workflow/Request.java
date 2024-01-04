@@ -12,8 +12,13 @@ public class Request extends AbstractTemplate<VToDo> {
         super(VToDo.class);
     }
 
-    public Request(Class<VToDo> typeClass) {
+    public Request(Class<? extends VToDo> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VToDo> Request(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     public Request type(String summary, RequestType requestType) {

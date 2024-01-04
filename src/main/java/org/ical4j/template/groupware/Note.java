@@ -2,11 +2,12 @@ package org.ical4j.template.groupware;
 
 import net.fortuna.ical4j.model.component.VJournal;
 import net.fortuna.ical4j.model.component.VLocation;
-import net.fortuna.ical4j.model.property.DtStart;
-import net.fortuna.ical4j.model.property.Summary;
 import org.ical4j.template.AbstractTemplate;
 
 import java.time.LocalDate;
+
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DTSTART;
+import static net.fortuna.ical4j.model.DescriptivePropertyModifiers.SUMMARY;
 
 /**
  * A Note is an independent journal item that may or may not refer to one or more other
@@ -24,8 +25,13 @@ public class Note extends AbstractTemplate<VJournal> {
         super(VJournal.class);
     }
 
-    public Note(Class<VJournal> typeClass) {
+    public Note(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Note(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     public Note title(String title) {
@@ -45,8 +51,8 @@ public class Note extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
-        vJournal.replace(new Summary(title));
-        vJournal.replace(new DtStart<>(date));
+        vJournal.with(SUMMARY, title);
+        vJournal.with(DTSTART, date);
         vJournal.add(location);
         return vJournal;
     }

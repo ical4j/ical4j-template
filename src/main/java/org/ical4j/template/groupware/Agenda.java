@@ -2,30 +2,33 @@ package org.ical4j.template.groupware;
 
 import net.fortuna.ical4j.extensions.concept.ActionType;
 import net.fortuna.ical4j.extensions.link.Next;
-import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.VToDo;
-import net.fortuna.ical4j.model.property.*;
+import net.fortuna.ical4j.model.property.Uid;
 import org.ical4j.template.AbstractTemplate;
-import org.ical4j.template.ComponentContainerSupport;
-import org.ical4j.template.PropertyContainerSupport;
+
+import java.net.URI;
+import java.time.temporal.Temporal;
+
+import static net.fortuna.ical4j.model.DescriptivePropertyModifiers.DESCRIPTION;
+import static net.fortuna.ical4j.model.DescriptivePropertyModifiers.SUMMARY;
+import static net.fortuna.ical4j.model.RelationshipPropertyModifiers.*;
 
 /**
  * One or more objectives, typically linked to a Meeting to guide outcomes.
  */
-public class Agenda extends AbstractTemplate<VToDo> implements PropertyContainerSupport<VToDo>,
-        ComponentContainerSupport<Component, VToDo> {
+public class Agenda extends AbstractTemplate<VToDo> {
 
-    private DtStart<?> start;
+    private Temporal start;
 
-    private Due<?> due;
+    private Temporal due;
 
-    private Organizer organizer;
+    private URI organizer;
 
     private Uid uid;
 
-    private Summary summary;
+    private String summary;
 
-    private Description description;
+    private String description;
 
     private Next nextItem;
 
@@ -33,17 +36,22 @@ public class Agenda extends AbstractTemplate<VToDo> implements PropertyContainer
         super(VToDo.class);
     }
 
-    public Agenda(Class<VToDo> typeClass) {
+    public Agenda(Class<? extends VToDo> typeClass) {
         super(typeClass);
     }
 
-    public Agenda uid(String uid) {
-        this.uid = new Uid(uid);
+    public <T extends VToDo> Agenda(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
+    }
+
+    public Agenda uid(Uid uid) {
+        this.uid = uid;
         return this;
     }
 
     public Agenda summary(String summary) {
-        this.summary = new Summary(summary);
+        this.summary = summary;
         return this;
     }
 
@@ -54,12 +62,13 @@ public class Agenda extends AbstractTemplate<VToDo> implements PropertyContainer
 
     @Override
     public VToDo apply(VToDo vToDo) {
-        vToDo.replace(ActionType.ACTION);
-        replaceIfNotNull(vToDo, summary);
-        replaceIfNotNull(vToDo, uid);
-        replaceIfNotNull(vToDo, organizer);
-        replaceIfNotNull(vToDo, description);
-        replaceIfNotNull(vToDo, nextItem);
+        vToDo.replace(ActionType.AGENDA);
+        vToDo.with(SUMMARY, summary);
+        vToDo.with(DESCRIPTION, description);
+        vToDo.with(ORGANIZER_URI, organizer);
+        vToDo.with(UID, uid);
+        vToDo.with(LINK, nextItem);
+
         return vToDo;
     }
 }

@@ -1,35 +1,38 @@
 package org.ical4j.template.groupware;
 
-import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.component.Participant;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VJournal;
-import net.fortuna.ical4j.model.property.DtEnd;
-import net.fortuna.ical4j.model.property.DtStart;
-import net.fortuna.ical4j.model.property.RelatedTo;
 import org.ical4j.template.AbstractTemplate;
-import org.ical4j.template.ComponentContainerSupport;
-import org.ical4j.template.PropertyContainerSupport;
 
 import java.time.temporal.Temporal;
+import java.util.function.BiFunction;
 
-public class Attendance extends AbstractTemplate<VJournal> implements PropertyContainerSupport<VJournal>,
-        ComponentContainerSupport<Component, VJournal> {
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DTEND;
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DTSTART;
+import static net.fortuna.ical4j.model.RelationshipPropertyModifiers.RELATED_COMPONENT;
+
+public class Attendance extends AbstractTemplate<VJournal> {
 
     private Participant participant;
 
-    private RelatedTo context;
+    private VEvent context;
 
-    private DtStart<?> start;
+    private Temporal start;
 
-    private DtEnd<?> end;
+    private Temporal end;
 
     public Attendance() {
         super(VJournal.class);
     }
 
-    public Attendance(Class<VJournal> typeClass) {
+    public Attendance(Class<? extends VJournal> typeClass) {
         super(typeClass);
+    }
+
+    public <T extends VJournal> Attendance(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
     }
 
     public Attendance participant(Participant participant) {
@@ -38,26 +41,28 @@ public class Attendance extends AbstractTemplate<VJournal> implements PropertyCo
     }
 
     public Attendance context(VEvent context) {
-        this.context = new RelatedTo(context);
+        this.context = context;
         return this;
     }
 
     public Attendance start(Temporal start) {
-        this.start = new DtStart<>(start);
+        this.start = start;
         return this;
     }
 
     public Attendance end(Temporal end) {
-        this.end = new DtEnd<>(end);
+        this.end = end;
         return this;
     }
 
     @Override
     public VJournal apply(VJournal vJournal) {
-        replaceIfNotNull(vJournal, start);
-        replaceIfNotNull(vJournal, end);
-        replaceIfNotNull(vJournal, participant);
-        replaceIfNotNull(vJournal, context);
+        vJournal.with(DTSTART, start);
+        vJournal.with(DTEND, end);
+        vJournal.with(RELATED_COMPONENT, context);
+        vJournal.with((BiFunction<VJournal, Participant, VJournal>) (c, p) -> { if (p != null) c.add(p); return c;},
+                participant);
+
         return vJournal;
     }
 }

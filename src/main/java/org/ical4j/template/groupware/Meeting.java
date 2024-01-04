@@ -1,53 +1,40 @@
 package org.ical4j.template.groupware;
 
 import net.fortuna.ical4j.extensions.concept.EventType;
-import net.fortuna.ical4j.model.Component;
-import net.fortuna.ical4j.model.ParameterList;
+import net.fortuna.ical4j.extensions.property.Repeats;
 import net.fortuna.ical4j.model.component.*;
-import net.fortuna.ical4j.model.parameter.*;
-import net.fortuna.ical4j.model.property.*;
-import net.fortuna.ical4j.vcard.PropertyName;
+import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.vcard.VCard;
-import net.fortuna.ical4j.vcard.property.CalAdrUri;
-import net.fortuna.ical4j.vcard.property.Fn;
 import org.ical4j.template.AbstractTemplate;
-import org.ical4j.template.ComponentContainerSupport;
-import org.ical4j.template.PropertyContainerSupport;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DTSTART;
+import static net.fortuna.ical4j.model.DateTimePropertyModifiers.DURATION;
+import static net.fortuna.ical4j.model.DescriptivePropertyModifiers.SUMMARY;
+import static net.fortuna.ical4j.model.RecurrencePropertyModifiers.RRULE;
+import static net.fortuna.ical4j.model.RelationshipPropertyModifiers.UID;
+import static org.ical4j.template.groupware.GroupwarePropertyModifiers.*;
 
 /**
  * Creates a {@link VEvent} representing a meeting of one or more attendees.
  */
-public class Meeting extends AbstractTemplate<VEvent> implements PropertyContainerSupport<VEvent>,
-        ComponentContainerSupport<Component, VEvent> {
+public class Meeting extends AbstractTemplate<VEvent> {
 
-    private static final ParameterList REQUIRED_PARAMS = new ParameterList(Arrays.asList(
-            CuType.INDIVIDUAL, Role.REQ_PARTICIPANT, PartStat.NEEDS_ACTION, Rsvp.TRUE));
+    private ZonedDateTime start;
 
-    private static final ParameterList OPTIONAL_PARAMS = new ParameterList(Arrays.asList(
-            CuType.INDIVIDUAL, Role.OPT_PARTICIPANT, PartStat.NEEDS_ACTION));
-    
-    private static final ParameterList CHAIR_PARAMS = new ParameterList(Arrays.asList(
-            CuType.INDIVIDUAL, Role.CHAIR));
+    private TemporalAmount duration;
 
-
-    private DtStart<?> start;
-
-    private Duration duration;
-
-    private Organizer organizer;
+    private VCard organizer;
 
     private Uid uid;
 
-    private Summary summary;
+    private String summary;
 
-    private Description description;
+    private String description;
 
     private Participant chair;
 
@@ -55,7 +42,11 @@ public class Meeting extends AbstractTemplate<VEvent> implements PropertyContain
 
     private final List<Participant> optional = new ArrayList<>();
 
+    private Repeats<ZonedDateTime> repeats;
+
     private VLocation location;
+
+    private List<VAlarm> notifications = new ArrayList<>();
 
     private VToDo agenda;
 
@@ -69,30 +60,27 @@ public class Meeting extends AbstractTemplate<VEvent> implements PropertyContain
         super(VEvent.class);
     }
 
-    public Meeting(Class<VEvent> typeClass) {
+    public Meeting(Class<? extends VEvent> typeClass) {
         super(typeClass);
     }
 
+    public <T extends VEvent> Meeting(T prototype) {
+        super(prototype.getClass());
+        setPrototype(prototype);
+    }
+
     public Meeting organizer(VCard card) {
-        CalAdrUri uri = card.getRequiredProperty(PropertyName.CALADRURI);
-        Fn name = card.getRequiredProperty(PropertyName.FN);
-        this.organizer = new Organizer(new ParameterList(Collections.singletonList(new Cn(name.getValue()))),
-                uri.getUri());
+        this.organizer = card;
         return this;
     }
 
     public Meeting start(ZonedDateTime start) {
-        this.start = new DtStart<>(start);
+        this.start = start;
         return this;
     }
 
-    public Meeting start(LocalDateTime start) {
-        this.start = new DtStart<>(start);
-        return this;
-    }
-
-    public Meeting duration(java.time.Duration duration) {
-        this.duration = new Duration(duration);
+    public Meeting duration(TemporalAmount duration) {
+        this.duration = duration;
         return this;
     }
 
@@ -111,8 +99,18 @@ public class Meeting extends AbstractTemplate<VEvent> implements PropertyContain
         return this;
     }
 
+    public Meeting repeats(Repeats<ZonedDateTime> repeats) {
+        this.repeats = repeats;
+        return this;
+    }
+
     public Meeting location(VLocation location) {
         this.location = location;
+        return this;
+    }
+
+    public Meeting notification(VAlarm notification) {
+        this.notifications.add(notification);
         return this;
     }
 
@@ -123,26 +121,24 @@ public class Meeting extends AbstractTemplate<VEvent> implements PropertyContain
 
     @Override
     public VEvent apply(VEvent vEvent) {
+        // apply prototype..
+        if (getPrototype() != null) {
+            getPrototype().getProperties().forEach(vEvent::add);
+        }
+
         // apply mandatory properties..
         vEvent.replace(EventType.MEETING);
-        replaceIfNotNull(vEvent, organizer);
-        replaceIfNotNull(vEvent, uid);
-        replaceIfNotNull(vEvent, summary);
-        replaceIfNotNull(vEvent, start);
-        replaceIfNotNull(vEvent, duration);
 
-        if (chair != null) {
-            vEvent.add(chair);
-            vEvent.add(new Attendee(CHAIR_PARAMS, chair));
-        }
-        required.forEach(p -> {
-            vEvent.add(p);
-            vEvent.add(new Attendee(REQUIRED_PARAMS, p));
-        });
-        optional.forEach(p -> {
-            vEvent.add(p);
-            vEvent.add(new Attendee(OPTIONAL_PARAMS, p));
-        });
+        vEvent.with(UID, uid);
+        vEvent.with(RRULE, repeats);
+        vEvent.with(SUMMARY, summary);
+        vEvent.with(DTSTART, start);
+        vEvent.with(DURATION, duration);
+        vEvent.with(ORGANIZER, organizer);
+        vEvent.with(CHAIR, chair);
+        required.forEach(p -> vEvent.with(REQUIRED_ATTENDEE, p));
+        optional.forEach(p -> vEvent.with(OPTIONAL_ATTENDEE, p));
+
 //        if (location != null) {
 //            vEvent.add(location);
 //        }
@@ -150,6 +146,7 @@ public class Meeting extends AbstractTemplate<VEvent> implements PropertyContain
 //        if (agenda != null) {
 //            vEvent.add(new Link(agenda));
 //        }
+        notifications.forEach(vEvent::add);
         //todo: for each existing attendee add corresponding participant component..
         return vEvent;
     }

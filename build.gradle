@@ -21,8 +21,8 @@ description = '''
 A collection of templates for popular calendar use-cases
 '''
 
-//sourceCompatibility = 11
-//targetCompatibility = 11
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -43,15 +43,14 @@ java {
 dependencies {
     api "org.mnode.ical4j:ical4j:$ical4jVersion",
             "org.mnode.ical4j:ical4j-vcard:$ical4jVcardVersion",
-            "org.mnode.ical4j:ical4j-extensions:$ical4jExtensionsVersion",
-            "org.ical4j:ical4j-serializer:$ical4jSerializerVersion"
+            "org.mnode.ical4j:ical4j-extensions:$ical4jExtensionsVersion"
 
-    implementation "com.j2html:j2html:$j2htmlVersion"
+//    implementation "com.j2html:j2html:$j2htmlVersion"
 
     testImplementation "org.codehaus.groovy:groovy-all:$groovyVersion"
 
     // spock
-    testImplementation platform("org.spockframework:spock-bom:2.0-M4-groovy-3.0"),
+    testImplementation platform("org.spockframework:spock-bom:$spockVersion"),
             "org.spockframework:spock-core"
 
     // logging

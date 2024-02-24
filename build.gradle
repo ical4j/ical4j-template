@@ -1,9 +1,3 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
 plugins {
     id 'java'
     id 'java-library'
@@ -12,8 +6,8 @@ plugins {
     id 'jacoco'
     id 'signing'
     id "pl.allegro.tech.build.axion-release" version "1.13.6"
-    id "nebula.optional-base" version "7.0.0"
     id "biz.aQute.bnd.builder" version "$bndVersion"
+    id 'org.javamodularity.moduleplugin' version '1.8.14'
 }
 
 group = 'org.ical4j'
@@ -21,8 +15,8 @@ description = '''
 A collection of templates for popular calendar use-cases
 '''
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
@@ -59,13 +53,34 @@ dependencies {
 }
 
 test {
+    moduleOptions {
+        runOnClasspath = true
+    }
+
     useJUnitPlatform()
+
+    finalizedBy jacocoTestCoverageVerification, jacocoTestReport // Ensure Jacoco is run after tests have completed
+
+    jvmArgs = [ "-Duser.timezone=UTC" ] // Some tests require default timezone to be UTC
+}
+
+jacocoTestCoverageVerification {
+    dependsOn test
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+            failOnViolation = false
+        }
+    }
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
-        xml.enabled true
-        html.enabled false
+        xml.required = true
+        html.required = jacoco_htmlReport == 'true'
     }
 }
 

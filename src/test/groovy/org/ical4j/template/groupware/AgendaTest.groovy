@@ -16,7 +16,7 @@ class AgendaTest extends Specification {
         then: 'the result matches expected'
         agenda as String ==~ /BEGIN:VTODO\r
 DTSTAMP:\d{8}T\d{6}Z\r
-CONCEPT:https:\/\/ical4j.org\/extensions\/concept\/action\/AGENDA\r
+CONCEPT:ical4j:concept:action:agenda\r
 END:VTODO\r\n/
 
         when: 'the agenda is updated'
@@ -30,28 +30,28 @@ END:VTODO\r\n/
         then: 'the result matches expected'
         components as String ==~ /BEGIN:VTODO\r
 DTSTAMP:\d{8}T\d{6}Z\r
-CONCEPT:https:\/\/ical4j.org\/extensions\/concept\/action\/AGENDA\r
+CONCEPT:ical4j:concept:action:agenda\r
 SUMMARY:Annual General Meeting \(AGM\)\r
 UID:1\r
 LINK;VALUE=UID;LINKREL=next:2\r
 END:VTODO\r
 BEGIN:VTODO\r
 DTSTAMP:\d{8}T\d{6}Z\r
-CONCEPT:https:\/\/ical4j.org\/extensions\/concept\/action\/AGENDA\r
+CONCEPT:ical4j:concept:action:agenda\r
 SUMMARY:Welcome and introductions\r
 UID:2\r
 LINK;VALUE=UID;LINKREL=next:3\r
 END:VTODO\r
 BEGIN:VTODO\r
 DTSTAMP:\d{8}T\d{6}Z\r
-CONCEPT:https:\/\/ical4j.org\/extensions\/concept\/action\/AGENDA\r
+CONCEPT:ical4j:concept:action:agenda\r
 SUMMARY:The year in review\r
 UID:3\r
 LINK;VALUE=UID;LINKREL=next:4\r
 END:VTODO\r
 BEGIN:VTODO\r
 DTSTAMP:\d{8}T\d{6}Z\r
-CONCEPT:https:\/\/ical4j.org\/extensions\/concept\/action\/AGENDA\r
+CONCEPT:ical4j:concept:action:agenda\r
 SUMMARY:Financial results\r
 UID:4\r
 END:VTODO\r\n/

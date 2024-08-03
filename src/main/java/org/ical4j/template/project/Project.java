@@ -34,6 +34,8 @@ public class Project extends AbstractTemplate<VToDo> {
 
     @Override
     public VToDo apply(VToDo vToDo) {
+        applyPrototype(vToDo);
+
         return vToDo;
     }
 }

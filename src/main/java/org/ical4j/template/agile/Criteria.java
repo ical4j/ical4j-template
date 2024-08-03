@@ -23,6 +23,8 @@ public class Criteria extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         return vJournal;
     }
 }

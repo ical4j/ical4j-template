@@ -20,6 +20,8 @@ public class Timesheet extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         return vJournal;
     }
 }

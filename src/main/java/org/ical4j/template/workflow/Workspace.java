@@ -43,6 +43,8 @@ public class Workspace extends AbstractTemplate<VCard> {
 
     @Override
     public VCard apply(VCard vCard) {
+        applyPrototype(vCard);
+
         vCard.replace(new Fn(title));
         members.forEach(m -> vCard.add(new Member(m)));
         return vCard;

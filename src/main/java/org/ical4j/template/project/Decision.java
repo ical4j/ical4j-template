@@ -40,6 +40,8 @@ public class Decision extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         vJournal.replace(status);
         return vJournal;
     }

@@ -20,6 +20,8 @@ public class Objective extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         return vJournal;
     }
 }

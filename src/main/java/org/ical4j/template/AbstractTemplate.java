@@ -1,5 +1,7 @@
 package org.ical4j.template;
 
+import net.fortuna.ical4j.model.PropertyContainer;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -9,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @param <T> the applicable object type
  */
-public abstract class AbstractTemplate<T> implements Template<T> {
+public abstract class AbstractTemplate<T extends PropertyContainer> implements Template<T> {
 
     private final Class<? extends T> typeClass;
 
@@ -31,5 +33,12 @@ public abstract class AbstractTemplate<T> implements Template<T> {
             IllegalAccessException {
 
         return apply(typeClass.getDeclaredConstructor().newInstance());
+    }
+
+    protected T applyPrototype(T target) {
+        if (prototype != null) {
+            getPrototype().getProperties().forEach(p -> target.add(p.copy()));
+        }
+        return target;
     }
 }

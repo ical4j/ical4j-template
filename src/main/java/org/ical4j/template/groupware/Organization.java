@@ -31,6 +31,8 @@ public class Organization extends AbstractTemplate<VCard> {
 
     @Override
     public VCard apply(VCard vCard) {
+        applyPrototype(vCard);
+
         vCard.with(GeneralPropertyModifiers.KIND, ImmutableKind.ORG);
         names.forEach(name -> vCard.with(IdentificationPropertyModifiers.FN, new Fn(name)));
         return vCard;

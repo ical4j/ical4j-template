@@ -41,6 +41,8 @@ public class Team extends AbstractTemplate<VCard> {
 
     @Override
     public VCard apply(VCard vCard) {
+        applyPrototype(vCard);
+
         vCard.with(GeneralPropertyModifiers.KIND, ImmutableKind.GROUP);
         names.forEach(name -> vCard.with(IdentificationPropertyModifiers.FN, new Fn(name)));
         members.forEach(member -> vCard.with(OrganizationalPropertyModifiers.MEMBER, new Member(member)));

@@ -32,6 +32,8 @@ public class Appointment extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
+        applyPrototype(vEvent);
+
         vEvent.with(DTSTART, start);
         return vEvent;
     }

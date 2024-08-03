@@ -43,6 +43,8 @@ public class Anniversary extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
+        applyPrototype(vEvent);
+
         vEvent.with(DTSTART, date);
         vEvent.with(RRULE, schedule);
         return vEvent;

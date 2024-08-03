@@ -51,6 +51,8 @@ public class Note extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         vJournal.with(SUMMARY, title);
         vJournal.with(DTSTART, date);
         vJournal.add(location);

@@ -11,6 +11,12 @@ class IndividualTest extends Specification {
         expect: 'kind == individual for new instances'
         new Individual().apply().kind.orElseThrow() == ImmutableKind.INDIVIDUAL
 
+        and: 'kind is updated correctly when using a prototype'
+        VCard prototype = new ContentBuilder().vcard {
+            kind ImmutableKind.ORG
+        }
+        new Individual(prototype).apply().kind.orElseThrow() == ImmutableKind.INDIVIDUAL
+
         and: 'kind is updated correctly for existing instances'
         VCard card = new ContentBuilder().vcard {
             kind ImmutableKind.ORG

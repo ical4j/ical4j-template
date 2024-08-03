@@ -62,6 +62,8 @@ public class Agenda extends AbstractTemplate<VToDo> {
 
     @Override
     public VToDo apply(VToDo vToDo) {
+        applyPrototype(vToDo);
+
         vToDo.replace(ActionType.AGENDA);
         vToDo.with(SUMMARY, summary);
         vToDo.with(DESCRIPTION, description);

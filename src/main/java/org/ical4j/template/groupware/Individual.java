@@ -59,6 +59,8 @@ public class Individual extends AbstractTemplate<VCard> {
 
     @Override
     public VCard apply(VCard vCard) {
+        applyPrototype(vCard);
+
         vCard.with(GeneralPropertyModifiers.KIND, ImmutableKind.INDIVIDUAL);
         vCard.with(IdentificationPropertyModifiers.N, new N(familyName, givenName,
                 additionalNames.toArray(new String[0]), prefixes.toArray(new String[0]),

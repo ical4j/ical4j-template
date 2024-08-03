@@ -121,10 +121,7 @@ public class Meeting extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
-        // apply prototype..
-        if (getPrototype() != null) {
-            getPrototype().getProperties().forEach(vEvent::add);
-        }
+        applyPrototype(vEvent);
 
         // apply mandatory properties..
         vEvent.replace(EventType.MEETING);

@@ -57,6 +57,8 @@ public class Attendance extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         vJournal.with(DTSTART, start);
         vJournal.with(DTEND, end);
         vJournal.with(RELATED_COMPONENT, context);

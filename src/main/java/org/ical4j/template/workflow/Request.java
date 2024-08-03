@@ -28,6 +28,8 @@ public class Request extends AbstractTemplate<VToDo> {
 
     @Override
     public VToDo apply(VToDo vToDo) {
+        applyPrototype(vToDo);
+
         vToDo.replace(requestType);
         return vToDo;
     }

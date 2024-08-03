@@ -1,14 +1,17 @@
 package org.ical4j.template;
 
+import net.fortuna.ical4j.model.PropertyContainer;
+
 import java.lang.reflect.InvocationTargetException;
-import java.util.function.UnaryOperator;
 
 /**
- * Base class for templates with the added ability to construct new object instances.
+ * Base class for templates with support for a prototype instance. A prototype is an
+ * instance of the applicable object type used to construct a new instance or modify
+ * an existing instance prior to applying the template.
  *
- * @param <T>
+ * @param <T> the applicable object type
  */
-public abstract class AbstractTemplate<T> implements UnaryOperator<T> {
+public abstract class AbstractTemplate<T extends PropertyContainer> implements Template<T> {
 
     private final Class<? extends T> typeClass;
 
@@ -30,5 +33,12 @@ public abstract class AbstractTemplate<T> implements UnaryOperator<T> {
             IllegalAccessException {
 
         return apply(typeClass.getDeclaredConstructor().newInstance());
+    }
+
+    protected T applyPrototype(T target) {
+        if (prototype != null) {
+            getPrototype().getProperties().forEach(p -> target.add(p.copy()));
+        }
+        return target;
     }
 }

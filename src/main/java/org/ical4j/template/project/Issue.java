@@ -47,6 +47,8 @@ public class Issue extends AbstractTemplate<VToDo> {
 
     @Override
     public VToDo apply(VToDo vToDo) {
+        applyPrototype(vToDo);
+
         vToDo.replace(issueType);
 //        vToDo.replace(status);
         vToDo.replace(parent);

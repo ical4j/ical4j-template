@@ -48,8 +48,7 @@ dependencies {
             "org.spockframework:spock-core"
 
     // logging
-    testImplementation "org.slf4j:slf4j-log4j12:$slf4jVersion",
-            "org.apache.logging.log4j:log4j:$log4jVersion"
+    testImplementation "org.apache.logging.log4j:log4j-core:$log4jVersion"
 }
 
 test {

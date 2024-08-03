@@ -33,9 +33,12 @@ END:VEVENT\r\n/
             fn('Big Boss')
             caladruri('mailto:boss@example.com')
         }
-        meeting = new Meeting().organizer(organizer)
-                .start(LocalDate.of(2023, 11, 13).atStartOfDay().atZone(ZoneId.of('America/New_York')))
-                .duration(Duration.ofMinutes(30)).apply(meeting)
+        meeting = new Meeting()
+                .organizer(organizer)
+                .start(LocalDate.of(2023, 11, 13)
+                        .atStartOfDay().atZone(ZoneId.of('America/New_York')))
+                .duration(Duration.ofMinutes(30))
+                .apply(meeting)
 
         then: 'the result matches expected'
         meeting as String ==~ /BEGIN:VEVENT\r

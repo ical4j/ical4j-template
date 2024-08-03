@@ -14,7 +14,7 @@ import static net.fortuna.ical4j.model.DescriptivePropertyModifiers.SUMMARY;
 
 /**
  * This represents an action undertaken by an actor in response to a related component.
- * Typically, actions are chained together to form a workflow.
+ * Actions may be chained together to form a workflow.
  *
  * See: <a href="https://schema.org/Action">Action</a>
  */
@@ -58,9 +58,12 @@ public class Action extends AbstractTemplate<VToDo> {
 
     @Override
     public VToDo apply(VToDo vToDo) {
-        vToDo.with(COMPLETED, completed);
+        applyPrototype(vToDo);
+
+//        vToDo.with(CONCEPT, ImmutableConcept.ACTION);
         vToDo.with(SUMMARY, summary);
         vToDo.with(DUE, due);
+        vToDo.with(COMPLETED, completed);
         vToDo.with((BiFunction<VToDo, Participant, VToDo>) (c, p) -> { if (p != null) c.add(p); return c;},
                 participant);
         return vToDo;

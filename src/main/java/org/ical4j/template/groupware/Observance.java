@@ -72,6 +72,8 @@ public class Observance extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
+        applyPrototype(vEvent);
+
         vEvent.replace(ImmutableTransp.TRANSPARENT);
         vEvent.with(DescriptivePropertyModifiers.SUMMARY, title);
         vEvent.with(DateTimePropertyModifiers.DTSTART, start);

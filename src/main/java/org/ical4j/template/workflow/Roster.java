@@ -20,6 +20,8 @@ public class Roster extends AbstractTemplate<VAvailability> {
 
     @Override
     public VAvailability apply(VAvailability vAvailability) {
+        applyPrototype(vAvailability);
+
         return vAvailability;
     }
 }

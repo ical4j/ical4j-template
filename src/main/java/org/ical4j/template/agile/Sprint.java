@@ -26,6 +26,8 @@ public class Sprint extends AbstractTemplate<VEvent> {
 
     @Override
     public VEvent apply(VEvent vEvent) {
+        applyPrototype(vEvent);
+
         return vEvent;
     }
 }

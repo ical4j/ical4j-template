@@ -23,6 +23,8 @@ public class Article extends AbstractTemplate<VJournal> {
 
     @Override
     public VJournal apply(VJournal vJournal) {
+        applyPrototype(vJournal);
+
         return vJournal;
     }
 }

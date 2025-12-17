@@ -2,6 +2,7 @@
 ical4j = "4.0.8"
 ical4j-vcard = "2.0.1"
 ical4j-extensions = "2.0.0-rc4"
+ical4j-connector = "2.0.0-beta2-SNAPSHOT"
 groovy = "3.0.22"
 log4j = "2.23.1"
 spock = "2.4-M4-groovy-3.0"
@@ -12,6 +13,9 @@ junitVintage = "5.10.2"
 ical4j = { module = "org.mnode.ical4j:ical4j", version.ref = "ical4j" }
 ical4j-vcard = { module = "org.mnode.ical4j:ical4j-vcard", version.ref = "ical4j-vcard" }
 ical4j-extensions = { module = "org.mnode.ical4j:ical4j-extensions", version.ref = "ical4j-extensions" }
+ical4j-connector-api = { module = "org.ical4j:ical4j-connector-api", version.ref = "ical4j-connector" }
+
+jte = { module = "gg.jte:jte", version = "3.2.1" }
 
 groovy = { module = "org.codehaus.groovy:groovy", version.ref = "groovy"}
 groovy-test = { module = "org.codehaus.groovy:groovy-test", version.ref = "groovy"}

@@ -2,7 +2,7 @@
 ical4j = "4.0.8"
 ical4j-vcard = "2.0.1"
 ical4j-extensions = "2.0.0-rc4"
-ical4j-connector = "2.0.0-beta2-SNAPSHOT"
+ical4j-connector = "2.0.0-beta1"
 groovy = "3.0.22"
 log4j = "2.23.1"
 spock = "2.4-M4-groovy-3.0"

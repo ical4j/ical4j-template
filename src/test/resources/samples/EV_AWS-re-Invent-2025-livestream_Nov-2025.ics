@@ -1,0 +1,121 @@
+BEGIN:VCALENDAR
+PRODID:-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN
+VERSION:2.0
+METHOD:PUBLISH
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:Pacific Standard Time
+BEGIN:STANDARD
+DTSTART:16011104T020000
+RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
+END:STANDARD
+BEGIN:DAYLIGHT
+DTSTART:16010311T020000
+RRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+CLASS:PUBLIC
+CREATED:20251127T002638Z
+DESCRIPTION:AWS re:Invent 2025 livestream\n\nExperience re:Invent virtually
+	. Watch keynotes and Innovation Talks in real time for the latest announce
+	ments\, plus access all breakout sessions on-demand—completely free.\n\n
+	More info > https://reinvent.awsevents.com/livestream/?trk=c2d99bec-d9d5-4
+	d48-8729-c04120146032\n\nWatch here > https://reinvent.awslivestream.com/\
+	n*Link will be live at the start of the livestream.\n\n-----\nKeynotes\nht
+	tps://reinvent.awsevents.com/keynotes/?trk=c2d99bec-d9d5-4d48-8729-c041201
+	46032\n \n- CEO Keynote with Matt Garman\n  Matt Garman\, AWS CEO\n  Tuesd
+	ay\, Dec 2 | 8:00 AM – 10:30 AM (PST)\n 	\n- The Future of Agentic AI is
+	 Here\n  Swami Sivasubramanian\, Vice President of Agentic AI\, AWS\n  Wed
+	nesday\, Dec 3 | 8:30 AM– 10:30 AM (PST)\n\n- The Partnership Advantage\
+	n  Dr. Ruba Borno\, VP Global Specialties and Partners\, AWS\n  Wednesday 
+	Dec 3 | 3:00 PM – 4:30 PM (PST)\n \n- Infrastructure Innovations\n  Pete
+	r DeSantis\, SVP Utility Computing AWS and Dave Brown\, VP Compute and Mac
+	hine Learning Services\, AWS \n  Thursday\, Dec 4 | 9:00 AM – 10:30 AM (
+	PST)\n \n- A Special Closing Keynote with Dr. Werner Vogels\n  Dr. Werner 
+	Vogels\, CTO\, Amazon.com\n  Thursday\, Dec 4 | 3:30 PM – 4:30 PM (PST)\
+	n\n-----\nInnovation Talks\nhttps://reinvent.awsevents.com/innovation-talk
+	s/?trk=c2d99bec-d9d5-4d48-8729-c04120146032\n\nInnovation Talks are deep-d
+	ive sessions featuring AWS thought leaders and experts who break down the 
+	latest technologies and strategies shaping the future of cloud computing.\
+	n\n- Monday\, Dec. 1 – Thursday\, Dec. 4 | 9:00 AM – 12:00 PM (PST) \n
+	- 15 sessions with AWS VPs and Distinguished Engineers covering AI\, analy
+	tics\, security\, and more\n\n-----\nRoad to re:Invent\n\n50 developers. 1
+	0 teams. One epic journey. Watch as competitors race against time during t
+	he ultimate hackathon\, coding their way through the desert on a high-stak
+	es bus journey from Los Angeles to Las Vegas.\n\n- Sunday\, Nov. 30 | 11:0
+	0 AM – 7:00 PM (PST)\n
+DTEND;TZID="Pacific Standard Time":20251204T163000
+DTSTAMP:20251130T170000Z
+DTSTART;TZID="Pacific Standard Time":20251130T110000
+LAST-MODIFIED:20251127T002638Z
+LOCATION:https://reinvent.awslivestream.com/
+PRIORITY:5
+SEQUENCE:0
+SUMMARY;LANGUAGE=en-us:AWS re:Invent 2025 livestream
+TRANSP:OPAQUE
+UID:3721806645675041
+X-ALT-DESC;FMTTYPE=text/html:<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//E
+	N">\n<HTML>\n<HEAD>\n<META NAME="Generator" CONTENT="MS Exchange Server ve
+	rsion 16.0.19231.20246">\n<TITLE></TITLE>\n</HEAD>\n<BODY>\n<!-- Converted
+	 from text/plain format -->\n\n<P><FONT SIZE=2>AWS re:Invent 2025 livestre
+	am</FONT>\n</P>\n\n<P><FONT SIZE=2>Experience re:Invent virtually. Watch k
+	eynotes and Innovation Talks in real time for the latest announcements\, p
+	lus access all breakout sessions on-demand—completely free.</FONT></P>\n
+	\n<P><FONT SIZE=2>More info &gt\; <A HREF="https://reinvent.awsevents.com/
+	livestream/?trk=c2d99bec-d9d5-4d48-8729-c04120146032">https://reinvent.aws
+	events.com/livestream/?trk=c2d99bec-d9d5-4d48-8729-c04120146032</A></FONT>
+	\n</P>\n\n<P><FONT SIZE=2>Watch here &gt\; <A HREF="https://reinvent.awsli
+	vestream.com/">https://reinvent.awslivestream.com/</A></FONT>\n\n<BR><FONT
+	 SIZE=2>*Link will be live at the start of the livestream.</FONT>\n</P>\n\
+	n<P><FONT SIZE=2>-----</FONT>\n\n<BR><FONT SIZE=2>Keynotes</FONT>\n\n<BR><
+	FONT SIZE=2><A HREF="https://reinvent.awsevents.com/keynotes/?trk=c2d99bec
+	-d9d5-4d48-8729-c04120146032">https://reinvent.awsevents.com/keynotes/?trk
+	=c2d99bec-d9d5-4d48-8729-c04120146032</A></FONT>\n\n<BR><FONT SIZE=2>&nbsp
+	\;</FONT>\n\n<BR><FONT SIZE=2>- CEO Keynote with Matt Garman</FONT>\n\n<BR
+	><FONT SIZE=2>&nbsp\; Matt Garman\, AWS CEO</FONT>\n\n<BR><FONT SIZE=2>&nb
+	sp\; Tuesday\, Dec 2 | 8:00 AM – 10:30 AM (PST)</FONT>\n\n<BR><FONT SIZE
+	=2>&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\; </FONT>\n\n<BR><FONT 
+	SIZE=2>- The Future of Agentic AI is Here</FONT>\n\n<BR><FONT SIZE=2>&nbsp
+	\; Swami Sivasubramanian\, Vice President of Agentic AI\, AWS</FONT>\n\n<B
+	R><FONT SIZE=2>&nbsp\; Wednesday\, Dec 3 | 8:30 AM– 10:30 AM (PST)</FONT
+	>\n</P>\n\n<P><FONT SIZE=2>- The Partnership Advantage</FONT>\n\n<BR><FONT
+	 SIZE=2>&nbsp\; Dr. Ruba Borno\, VP Global Specialties and Partners\, AWS<
+	/FONT>\n\n<BR><FONT SIZE=2>&nbsp\; Wednesday Dec 3 | 3:00 PM – 4:30 PM (
+	PST)</FONT>\n\n<BR><FONT SIZE=2>&nbsp\;</FONT>\n\n<BR><FONT SIZE=2>- Infra
+	structure Innovations</FONT>\n\n<BR><FONT SIZE=2>&nbsp\; Peter DeSantis\, 
+	SVP Utility Computing AWS and Dave Brown\, VP Compute and Machine Learning
+	 Services\, AWS </FONT>\n\n<BR><FONT SIZE=2>&nbsp\; Thursday\, Dec 4 | 9:0
+	0 AM – 10:30 AM (PST)</FONT>\n\n<BR><FONT SIZE=2>&nbsp\;</FONT>\n\n<BR><
+	FONT SIZE=2>- A Special Closing Keynote with Dr. Werner Vogels</FONT>\n\n<
+	BR><FONT SIZE=2>&nbsp\; Dr. Werner Vogels\, CTO\, Amazon.com</FONT>\n\n<BR
+	><FONT SIZE=2>&nbsp\; Thursday\, Dec 4 | 3:30 PM – 4:30 PM (PST)</FONT>\
+	n</P>\n\n<P><FONT SIZE=2>-----</FONT>\n\n<BR><FONT SIZE=2>Innovation Talks
+	</FONT>\n\n<BR><FONT SIZE=2><A HREF="https://reinvent.awsevents.com/innova
+	tion-talks/?trk=c2d99bec-d9d5-4d48-8729-c04120146032">https://reinvent.aws
+	events.com/innovation-talks/?trk=c2d99bec-d9d5-4d48-8729-c04120146032</A><
+	/FONT>\n</P>\n\n<P><FONT SIZE=2>Innovation Talks are deep-dive sessions fe
+	aturing AWS thought leaders and experts who break down the latest technolo
+	gies and strategies shaping the future of cloud computing.</FONT></P>\n\n<
+	P><FONT SIZE=2>- Monday\, Dec. 1 – Thursday\, Dec. 4 | 9:00 AM – 12:00
+	 PM (PST) </FONT>\n\n<BR><FONT SIZE=2>- 15 sessions with AWS VPs and Disti
+	nguished Engineers covering AI\, analytics\, security\, and more</FONT>\n<
+	/P>\n\n<P><FONT SIZE=2>-----</FONT>\n\n<BR><FONT SIZE=2>Road to re:Invent<
+	/FONT>\n</P>\n\n<P><FONT SIZE=2>50 developers. 10 teams. One epic journey.
+	 Watch as competitors race against time during the ultimate hackathon\, co
+	ding their way through the desert on a high-stakes bus journey from Los An
+	geles to Las Vegas.</FONT></P>\n\n<P><FONT SIZE=2>- Sunday\, Nov. 30 | 11:
+	00 AM – 7:00 PM (PST)</FONT>\n</P>\n\n</BODY>\n</HTML>
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-IMPORTANCE:1
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR

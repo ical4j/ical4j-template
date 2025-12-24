@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Joe Bloggs
+N:Bloggs;Joe;;;
+ORG:Bloggs & Associates
+TITLE:Senior Consultant
+TEL;TYPE=WORK,VOICE:+44 20 7123 4567
+TEL;TYPE=CELL:+44 7700 900123
+EMAIL;TYPE=INTERNET:joe.bloggs@example.com
+ADR;TYPE=WORK:;;123 Example Street;London;;EC1A 1BB;United Kingdom
+URL:https://www.joebloggs.example.com
+NOTE:Fictitious contact created for demonstration purposes
+END:VCARD

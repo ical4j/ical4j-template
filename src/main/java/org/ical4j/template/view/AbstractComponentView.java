@@ -2,8 +2,7 @@ package org.ical4j.template.view;
 
 import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.parameter.LinkRel;
-import net.fortuna.ical4j.model.property.Concept;
-import net.fortuna.ical4j.model.property.Link;
+import net.fortuna.ical4j.model.property.*;
 import org.ical4j.template.util.EmojiProvider;
 
 import java.time.ZoneId;
@@ -74,5 +73,40 @@ public class AbstractComponentView {
             return EmojiProvider.getEmoji(linkRelation.getLinkRelationType().toString()) + " " + link.getValue();
         }
         return "";
+    }
+
+    protected String getStatusString(Status status) {
+        return status != null ? EmojiProvider.getEmoji(status.getValue()) + " " + status.getValue() : "";
+    }
+
+    protected String getPriorityString(Priority priority) {
+        if (priority == null) {
+            return "⚪ None";
+        }
+        int value = priority.getLevel();
+        if (value >= 1 && value <= 3) {
+            return "🔴 High";
+        } else if (value >= 4 && value <= 6) {
+            return "🟡 Medium";
+        } else if (value >= 7 && value <= 9) {
+            return "🟢 Low";
+        } else {
+            return "⚪ None";
+        }
+    }
+
+    protected String getPercentCompleteString(PercentComplete percentComplete) {
+        if (percentComplete != null) {
+            int value = percentComplete.getPercentage();
+            if (value >= 0 && value <= 100) {
+                return "📊 " + percentComplete + "%";
+            }
+        }
+        return "📊 N/A";
+    }
+
+    protected String getClassificationString(Clazz classification) {
+        return classification != null ? EmojiProvider.getEmoji(classification.getValue()) + " "
+                + classification.getValue() : "";
     }
 }

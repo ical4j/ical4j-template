@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class EventView extends AbstractComponentView {
+public class VEventView extends AbstractComponentView {
 
     private final VEvent event;
 
@@ -25,19 +25,19 @@ public class EventView extends AbstractComponentView {
 
     private final ZoneId zoneId;
 
-    public EventView(VEvent event) {
+    public VEventView(VEvent event) {
         this(event, null, null, ZoneId.systemDefault());
     }
 
-    public EventView(VEvent event, ZoneId zoneId) {
+    public VEventView(VEvent event, ZoneId zoneId) {
         this(event, null, null, zoneId);
     }
 
-    public EventView(VEvent event, Temporal periodStart, Temporal periodEnd) {
+    public VEventView(VEvent event, Temporal periodStart, Temporal periodEnd) {
         this(event, periodStart, periodEnd, ZoneId.systemDefault());
     }
 
-    public EventView(VEvent event, Temporal periodStart, Temporal periodEnd, ZoneId zoneId) {
+    public VEventView(VEvent event, Temporal periodStart, Temporal periodEnd, ZoneId zoneId) {
         this.event = event;
         this.periodStart = periodStart;
         this.periodEnd = periodEnd;
@@ -71,10 +71,18 @@ public class EventView extends AbstractComponentView {
                 + event.getLocation().getValue() : "";
     }
 
+    public String getStatus() {
+        return getStatusString(event.getStatus());
+    }
+
+    public String getPriority() {
+        return getPriorityString(event.getPriority());
+    }
+
     public List<String> getOccurrences() {
         if (periodStart != null && periodEnd != null) {
             List<VEvent> occurrences = event.getOccurrences(new Period<>(periodStart, periodEnd));
-            return occurrences.stream().map(o -> new EventView(o).getStart()).collect(Collectors.toList());
+            return occurrences.stream().map(o -> new VEventView(o).getStart()).collect(Collectors.toList());
         }
         return List.of(getStart());
     }

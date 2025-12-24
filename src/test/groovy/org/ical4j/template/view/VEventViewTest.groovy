@@ -36,14 +36,14 @@ import spock.lang.Specification
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-class EventViewTest extends Specification {
+class VEventViewTest extends Specification {
 
     def 'test event view rendering'() {
         given: 'an event'
         def calendar = Calendars.load(getClass().getResource('/samples/EV_AWS-re-Invent-2025-livestream_Nov-2025.ics'))
 
         and: 'an event view'
-        def eventView = new EventView((VEvent) calendar.getComponent("VEVENT").get(), null)
+        def eventView = new VEventView((VEvent) calendar.getComponent("VEVENT").get(), null)
 
         expect: 'the output is as expected'
         eventView.toString() == '''Summary: AWS re:Invent 2025 livestream

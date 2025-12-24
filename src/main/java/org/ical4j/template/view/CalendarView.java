@@ -26,7 +26,7 @@ public class CalendarView {
     public List<String> getEvents() {
         List<CalendarComponent> events = calendar.getComponents("VEVENT");
         return events.stream().map(e ->
-                new EventView((net.fortuna.ical4j.model.component.VEvent) e, null).toString()).toList();
+                new VEventView((net.fortuna.ical4j.model.component.VEvent) e, null).toString()).toList();
     }
 
     public String toString() {

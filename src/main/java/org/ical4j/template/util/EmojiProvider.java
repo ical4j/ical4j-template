@@ -89,6 +89,23 @@ public class EmojiProvider {
             case "1030" -> "\uD83D\uDD65"; // 10:30 🕥
             case "1130" -> "\uD83D\uDD66"; // 11:30 🕦
 
+            // classification emojis
+            case "public" -> "\uD83D\uDD13"; // Open Lock 🔓
+            case "private" -> "\uD83D\uDD12"; // Closed Lock 🔒
+            case "confidential" -> "\uD83D\uDD10"; // Locked with Pen 🔐
+
+            // entity kinds
+            case "individual" -> "\uD83D\uDC64"; // Bust in Silhouette 👤
+            case "group" -> "\uD83D\uDC65"; // Busts in Silhouette 👥
+            case "organization" -> "\uD83C\uDFE2"; // Office Building 🏢
+//            case "location" -> "\uD83C\uDFE0"; // House Building 🏠
+
+            // communication types
+            case "phone" -> "\uD83D\uDCDE"; // Telephone Receiver 📞
+            case "fax" -> "\uD83D\uDCE0"; // Fax Machine 📠
+            case "pager" -> "\uD83D\uDCDF"; // Pager 📟
+            case "url" -> "\uD83D\uDD17"; // Link 🔗
+
             default -> "";
         };
     }

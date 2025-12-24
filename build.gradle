@@ -27,8 +27,8 @@ repositories {
 }
 
 java {
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 17
+    targetCompatibility = 17
 
     withJavadocJar()
     withSourcesJar()
@@ -46,7 +46,9 @@ dependencies {
     testImplementation platform(libs.spock.bom), libs.spock.core
 
     // logging
-    testImplementation libs.log4j.core
+    testImplementation libs.log4j.core, libs.log4j.slf4j2
+
+    testRuntimeOnly libs.junit.platform
 }
 
 test {
@@ -57,8 +59,6 @@ test {
     useJUnitPlatform()
 
     finalizedBy jacocoTestCoverageVerification, jacocoTestReport // Ensure Jacoco is run after tests have completed
-
-    jvmArgs = [ "-Duser.timezone=UTC" ] // Some tests require default timezone to be UTC
 }
 
 jacocoTestCoverageVerification {

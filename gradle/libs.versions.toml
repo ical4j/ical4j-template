@@ -1,6 +1,6 @@
 [versions]
-ical4j = "4.0.8"
-ical4j-vcard = "2.0.1"
+ical4j = "4.2.3-develop-SNAPSHOT"
+ical4j-vcard = "2.1.0"
 ical4j-extensions = "2.0.0-rc4"
 ical4j-connector = "2.0.0-beta1"
 groovy = "3.0.22"
@@ -27,3 +27,4 @@ spock-bom = { module = "org.spockframework:spock-bom", version.ref = "spock"}
 spock-core = { module = "org.spockframework:spock-core", version.ref = "spock"}
 
 junit-jupiter = { group = "org.junit.jupiter", name="junit-jupiter", version.ref = "junitVintage"}
+junit-platform = { module = "org.junit.platform:junit-platform-launcher" }

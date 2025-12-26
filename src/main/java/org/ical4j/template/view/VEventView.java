@@ -2,6 +2,7 @@ package org.ical4j.template.view;
 
 import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
@@ -63,6 +64,16 @@ public class VEventView extends AbstractComponentView {
             return getLocalizedDateString(Objects.requireNonNull(dtEnd).getDate());
         } else {
             return getLocalizedDateTimeString(Objects.requireNonNull(dtEnd).getDate(), zoneId);
+        }
+    }
+
+    public String getDescription() {
+        List<Property> descriptionProps = event.getProperties(Property.STYLED_DESCRIPTION, "X-ALT-DESC",
+                Property.DESCRIPTION);
+        if (!descriptionProps.isEmpty()) {
+            return descriptionProps.get(0).getValue();
+        } else {
+            return "";
         }
     }
 

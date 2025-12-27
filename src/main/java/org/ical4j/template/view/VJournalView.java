@@ -2,9 +2,8 @@ package org.ical4j.template.view;
 
 import net.fortuna.ical4j.model.component.VJournal;
 
-import java.util.Objects;
-
-public class VJournalView extends AbstractComponentView {
+public class VJournalView extends AbstractComponentView implements DescriptivePropertyView<VJournal>,
+    ChangeManagementPropertyView<VJournal> {
 
     private final VJournal journal;
 
@@ -12,15 +11,14 @@ public class VJournalView extends AbstractComponentView {
         this.journal = journal;
     }
 
-    public String getSummary() {
-        return Objects.requireNonNull(journal.getSummary()).getValue();
+    @Override
+    public VJournal getPropertyAccessor() {
+        return journal;
     }
 
-    public String getStatus() {
-        return getStatusString(journal.getStatus());
-    }
-
-    public String getClassification() {
-        return getClassificationString(journal.getClassification());
+    public String toString() {
+        return "Journal: " + getSummary() + "\n" +
+                "Created: " + getCreated() + "\n" +
+                "Last Modified: " + getLastModified() + "\n";
     }
 }

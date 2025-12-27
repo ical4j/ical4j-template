@@ -1,9 +1,10 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.component.VAvailability;
+import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.component.Available;
 
 import java.time.ZoneId;
-import java.util.List;
+import java.time.temporal.Temporal;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -36,20 +37,39 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class VAvailabilityView extends AbstractComponentView implements DescriptivePropertyView<VAvailability>,
-    DateTimePropertyView<VAvailability> {
+public class AvailableView extends AbstractComponentView implements DescriptivePropertyView<Available>,
+        DateTimePropertyView<Available>, RecurrenceView<Available, Available> {
 
-    private final VAvailability availability;
+    private final Available available;
+
+    private final Temporal periodStart;
+
+    private final Temporal periodEnd;
 
     private final ZoneId zoneId;
 
-    public VAvailabilityView(VAvailability availability) {
-        this(availability, ZoneId.systemDefault());
+    public AvailableView(Available available) {
+        this(available, ZoneId.systemDefault());
     }
 
-    public VAvailabilityView(VAvailability availability, ZoneId zoneId) {
-        this.availability = availability;
+    public AvailableView(Available available, ZoneId zoneId) {
+        this(available, null, null, zoneId);
+    }
+
+    public AvailableView(Available available, Temporal periodStart, Temporal periodEnd) {
+        this(available, periodStart, periodEnd, ZoneId.systemDefault());
+    }
+
+    public AvailableView(Available available, Temporal periodStart, Temporal periodEnd, ZoneId zoneId) {
+        this.available = available;
+        this.periodStart = periodStart;
+        this.periodEnd = periodEnd;
         this.zoneId = zoneId;
+    }
+
+    @Override
+    public Available getPropertyAccessor() {
+        return available;
     }
 
     @Override
@@ -58,19 +78,31 @@ public class VAvailabilityView extends AbstractComponentView implements Descript
     }
 
     @Override
-    public VAvailability getPropertyAccessor() {
-        return availability;
-    }
-
-    public List<String> getAvailablePeriods() {
-        return availability.getAvailable().stream().map(a -> new AvailableView(a).toString()).toList();
+    public Available getRecurrenceSupport() {
+        return available;
     }
 
     @Override
+    public Period<Temporal> getPeriod() {
+        if (periodStart != null && periodEnd != null) {
+            return new Period<>(periodStart, periodEnd);
+        }
+        return null;
+    }
+
     public String toString() {
-        return "Summary: " + getSummary() + "\n" +
-               "Start: " + getStart() + "\n" +
-               "End: " + getEnd() + "\n" +
-               "Available Periods: " + String.join("\n", getAvailablePeriods());
+        return "Available: " + getSummary() + "\n" +
+                "Start: " + getStart() + "\n" +
+                "End: " + getEnd() + "\n";
+    }
+
+    public static class AvailableViewFactory implements ViewFactory<Available> {
+
+        public static final AvailableViewFactory INSTANCE = new AvailableViewFactory();
+
+        @Override
+        public AvailableView createView(Available model) {
+            return new AvailableView(model);
+        }
     }
 }

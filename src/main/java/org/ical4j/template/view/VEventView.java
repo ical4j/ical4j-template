@@ -1,22 +1,13 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Period;
-import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.DtEnd;
-import net.fortuna.ical4j.model.property.DtStart;
-import net.fortuna.ical4j.vcard.parameter.Value;
-import org.ical4j.template.util.EmojiProvider;
 
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class VEventView extends AbstractComponentView {
+public class VEventView extends AbstractComponentView implements DescriptivePropertyView<VEvent>,
+    DateTimePropertyView<VEvent>, RecurrenceView<VEvent, VEvent> {
 
     private final VEvent event;
 
@@ -45,57 +36,27 @@ public class VEventView extends AbstractComponentView {
         this.zoneId = zoneId;
     }
 
-    public String getSummary() {
-        return Objects.requireNonNull(event.getSummary()).getValue();
+    @Override
+    public VEvent getPropertyAccessor() {
+        return event;
     }
 
-    public String getStart() {
-        DtStart<?> dtStart = event.getDateTimeStart();
-        if (Optional.of(Value.DATE).equals(dtStart.getParameter(Parameter.VALUE))) {
-            return getLocalizedDateString(Objects.requireNonNull(dtStart).getDate());
-        } else {
-            return getLocalizedDateTimeString(Objects.requireNonNull(dtStart).getDate(), zoneId);
-        }
+    @Override
+    public ZoneId getZoneId() {
+        return zoneId;
     }
 
-    public String getEnd() {
-        DtEnd<?> dtEnd = event.getDateTimeEnd();
-        if (Optional.of(Value.DATE).equals(dtEnd.getParameter(Parameter.VALUE))) {
-            return getLocalizedDateString(Objects.requireNonNull(dtEnd).getDate());
-        } else {
-            return getLocalizedDateTimeString(Objects.requireNonNull(dtEnd).getDate(), zoneId);
-        }
+    @Override
+    public VEvent getRecurrenceSupport() {
+        return event;
     }
 
-    public String getDescription() {
-        List<Property> descriptionProps = event.getProperties(Property.STYLED_DESCRIPTION, "X-ALT-DESC",
-                Property.DESCRIPTION);
-        if (!descriptionProps.isEmpty()) {
-            return descriptionProps.get(0).getValue();
-        } else {
-            return "";
-        }
-    }
-
-    public String getLocation() {
-        return event.getLocation() != null ? EmojiProvider.getEmoji("location") + " "
-                + event.getLocation().getValue() : "";
-    }
-
-    public String getStatus() {
-        return getStatusString(event.getStatus());
-    }
-
-    public String getPriority() {
-        return getPriorityString(event.getPriority());
-    }
-
-    public List<String> getOccurrences() {
+    @Override
+    public Period<Temporal> getPeriod() {
         if (periodStart != null && periodEnd != null) {
-            List<VEvent> occurrences = event.getOccurrences(new Period<>(periodStart, periodEnd));
-            return occurrences.stream().map(o -> new VEventView(o).getStart()).collect(Collectors.toList());
+            return new Period<>(periodStart, periodEnd);
         }
-        return List.of(getStart());
+        return null;
     }
 
     @Override
@@ -107,6 +68,20 @@ public class VEventView extends AbstractComponentView {
         if (!getLocation().isBlank()) {
             value += "Location: " + getLocation() + "\n";
         }
+
+        if (getPeriod() != null) {
+            value += "Occurrences: " + String.join(", ", getOccurrences(VEventViewFactory.INSTANCE)) + "\n";
+        }
         return value;
+    }
+
+    public static class VEventViewFactory implements ViewFactory<VEvent> {
+
+        public static final VEventViewFactory INSTANCE = new VEventViewFactory();
+
+        @Override
+        public Object createView(VEvent model) {
+            return new VEventView(model);
+        }
     }
 }

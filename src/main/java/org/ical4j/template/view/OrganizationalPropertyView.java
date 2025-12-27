@@ -1,15 +1,10 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.Parameter;
-import net.fortuna.ical4j.model.parameter.LinkRel;
-import net.fortuna.ical4j.model.property.*;
-import org.ical4j.template.util.EmojiProvider;
+import net.fortuna.ical4j.vcard.OrganizationalPropertyAccessor;
+import net.fortuna.ical4j.vcard.property.Org;
+import net.fortuna.ical4j.vcard.property.Title;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.temporal.Temporal;
-import java.util.Objects;
+import java.util.List;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -42,21 +37,16 @@ import java.util.Objects;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class AbstractComponentView {
+public interface OrganizationalPropertyView<T extends OrganizationalPropertyAccessor> {
 
-    protected String getSafeString(String value) {
-        return Objects.requireNonNullElse(value, "");
+    T getPropertyAccessor();
+
+    default List<String> getTitles() {
+        return getPropertyAccessor().getTitles().stream().map(Title::getValue).toList();
     }
 
-    protected String getConceptString(Concept concept) {
-        return concept != null ? EmojiProvider.getEmoji(concept.getValue()) + " " + concept.getValue() : "";
+    default List<String> getOrganizations() {
+        return getPropertyAccessor().getOrganizations().stream().map(Org::getValue).toList();
     }
 
-    protected String getLinkString(Link link) {
-        if (link != null) {
-            LinkRel linkRelation = link.getRequiredParameter(Parameter.RELTYPE);
-            return EmojiProvider.getEmoji(linkRelation.getLinkRelationType().toString()) + " " + link.getValue();
-        }
-        return "";
-    }
 }

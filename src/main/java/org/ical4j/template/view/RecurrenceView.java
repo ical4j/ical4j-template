@@ -1,15 +1,13 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.Parameter;
-import net.fortuna.ical4j.model.parameter.LinkRel;
-import net.fortuna.ical4j.model.property.*;
-import org.ical4j.template.util.EmojiProvider;
+import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.Period;
+import net.fortuna.ical4j.model.RecurrenceSupport;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.time.temporal.Temporal;
-import java.util.Objects;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -42,21 +40,19 @@ import java.util.Objects;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class AbstractComponentView {
+public interface RecurrenceView<T extends Component, R extends RecurrenceSupport<T>> {
 
-    protected String getSafeString(String value) {
-        return Objects.requireNonNullElse(value, "");
-    }
+    R getRecurrenceSupport();
 
-    protected String getConceptString(Concept concept) {
-        return concept != null ? EmojiProvider.getEmoji(concept.getValue()) + " " + concept.getValue() : "";
-    }
+    Period<Temporal> getPeriod();
 
-    protected String getLinkString(Link link) {
-        if (link != null) {
-            LinkRel linkRelation = link.getRequiredParameter(Parameter.RELTYPE);
-            return EmojiProvider.getEmoji(linkRelation.getLinkRelationType().toString()) + " " + link.getValue();
+    default List<String> getOccurrences(ViewFactory<T> viewFactory) {
+        Period<Temporal> period = getPeriod();
+        if (period != null) {
+            List<T> occurrences = getRecurrenceSupport().getOccurrences(getPeriod());
+            return occurrences.stream().map(o -> viewFactory.createView(o).toString()).collect(Collectors.toList());
         }
-        return "";
+        return Collections.emptyList();
     }
+
 }

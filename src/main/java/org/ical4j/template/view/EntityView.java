@@ -1,12 +1,10 @@
 package org.ical4j.template.view;
 
 import net.fortuna.ical4j.vcard.Entity;
-import net.fortuna.ical4j.vcard.property.Fn;
 import org.ical4j.template.util.EmojiProvider;
 
-import java.util.List;
-
-public class EntityView {
+public class EntityView implements CommunicationsPropertyView<Entity>, ExplanatoryPropertyView<Entity>,
+    GeneralPropertyView<Entity>, IdentificationPropertyView<Entity>, OrganizationalPropertyView<Entity> {
 
     private final Entity entity;
 
@@ -14,27 +12,9 @@ public class EntityView {
         this.entity = entity;
     }
 
-    public String getKind() {
-        if (entity.getKind() == null) {
-            return "";
-        }
-        return EmojiProvider.getEmoji(entity.getKind().getValue()) + " " + entity.getKind().getValue();
-    }
-
-    public List<String> getFormattedNames() {
-        return entity.getFormattedNames().stream().map(Fn::getValue).toList();
-    }
-
-    public List<String> getTelephones() {
-        return entity.getTelephones().stream()
-                .map(tel -> EmojiProvider.getEmoji("phone") + " " + tel.getValue())
-                .toList();
-    }
-
-    public List<String> getEmails() {
-        return entity.getEmails().stream()
-                .map(email -> EmojiProvider.getEmoji("email") + " " + email.getValue())
-                .toList();
+    @Override
+    public Entity getPropertyAccessor() {
+        return entity;
     }
 
     public String toString() {
@@ -43,8 +23,12 @@ public class EntityView {
             sb.append(getKind()).append("\n");
         }
         getFormattedNames().forEach(name -> sb.append(name).append("\n"));
-        getTelephones().forEach(tel -> sb.append(tel).append("\n"));
-        getEmails().forEach(email -> sb.append(email).append("\n"));
+        getTelephones().forEach(tel -> sb.append(EmojiProvider.getEmoji("phone")).append(" ").append(tel).append("\n"));
+        getEmails().forEach(email -> sb.append(EmojiProvider.getEmoji("email")).append(" ").append(email).append("\n"));
+        getUrls().forEach(url -> sb.append(EmojiProvider.getEmoji("url")).append(" ").append(url).append("\n"));
+        getNotes().forEach(note -> sb.append(EmojiProvider.getEmoji("note")).append(" ").append(note).append("\n"));
+        getTitles().forEach(title -> sb.append(EmojiProvider.getEmoji("title")).append(" ").append(title).append("\n"));
+        getOrganizations().forEach(org -> sb.append(EmojiProvider.getEmoji("organization")).append(" ").append(org).append("\n"));
         return sb.toString();
     }
 }

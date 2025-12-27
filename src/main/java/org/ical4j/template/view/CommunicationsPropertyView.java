@@ -1,15 +1,10 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.Parameter;
-import net.fortuna.ical4j.model.parameter.LinkRel;
-import net.fortuna.ical4j.model.property.*;
-import org.ical4j.template.util.EmojiProvider;
+import net.fortuna.ical4j.vcard.CommunicationsPropertyAccessor;
+import net.fortuna.ical4j.vcard.property.Email;
+import net.fortuna.ical4j.vcard.property.Telephone;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.temporal.Temporal;
-import java.util.Objects;
+import java.util.List;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -42,21 +37,16 @@ import java.util.Objects;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class AbstractComponentView {
+public interface CommunicationsPropertyView<T extends CommunicationsPropertyAccessor> {
 
-    protected String getSafeString(String value) {
-        return Objects.requireNonNullElse(value, "");
+    T getPropertyAccessor();
+
+    default List<String> getTelephones() {
+        return getPropertyAccessor().getTelephones().stream().map(Telephone::getValue).toList();
     }
 
-    protected String getConceptString(Concept concept) {
-        return concept != null ? EmojiProvider.getEmoji(concept.getValue()) + " " + concept.getValue() : "";
+    default List<String> getEmails() {
+        return getPropertyAccessor().getEmails().stream().map(Email::getValue).toList();
     }
 
-    protected String getLinkString(Link link) {
-        if (link != null) {
-            LinkRel linkRelation = link.getRequiredParameter(Parameter.RELTYPE);
-            return EmojiProvider.getEmoji(linkRelation.getLinkRelationType().toString()) + " " + link.getValue();
-        }
-        return "";
-    }
 }

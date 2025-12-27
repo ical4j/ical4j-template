@@ -1,0 +1,105 @@
+package org.ical4j.template.view;
+
+import net.fortuna.ical4j.model.DescriptivePropertyAccessor;
+import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.property.*;
+import org.ical4j.template.util.EmojiProvider;
+
+import java.util.List;
+import java.util.Objects;
+
+/*
+ * Copyright (c) 2025, Ben Fortuna
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ *  o Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of Ben Fortuna nor the names of any other contributors
+ * may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+public interface DescriptivePropertyView<T extends DescriptivePropertyAccessor> {
+
+    T getPropertyAccessor();
+
+    default String getSummary() {
+        return Objects.requireNonNull(getPropertyAccessor().getSummary()).getValue();
+    }
+
+    default String getDescription() {
+        List<Property> descriptionProps = getPropertyAccessor().getProperties(Property.STYLED_DESCRIPTION, "X-ALT-DESC",
+                Property.DESCRIPTION);
+        if (!descriptionProps.isEmpty()) {
+            return descriptionProps.get(0).getValue();
+        } else {
+            return "";
+        }
+    }
+
+    default String getStatus() {
+        Status status = getPropertyAccessor().getStatus();
+        return status != null ? EmojiProvider.getEmoji(status.getValue()) + " " + status.getValue() : "";
+    }
+
+    default String getPriority() {
+        Priority priority = getPropertyAccessor().getPriority();
+        if (priority == null) {
+            return "⚪ None";
+        }
+        int value = priority.getLevel();
+        if (value >= 1 && value <= 3) {
+            return "🔴 High";
+        } else if (value >= 4 && value <= 6) {
+            return "🟡 Medium";
+        } else if (value >= 7 && value <= 9) {
+            return "🟢 Low";
+        } else {
+            return "⚪ None";
+        }
+    }
+
+    default String getClassification() {
+        Clazz classification = getPropertyAccessor().getClassification();
+        return classification != null ? EmojiProvider.getEmoji(classification.getValue()) + " "
+                + classification.getValue() : "";
+    }
+
+    default String getPercentComplete() {
+        PercentComplete percentComplete = getPropertyAccessor().getPercentComplete();
+        if (percentComplete != null) {
+            int value = percentComplete.getPercentage();
+            if (value >= 0 && value <= 100) {
+                return "📊 " + percentComplete + "%";
+            }
+        }
+        return "📊 N/A";
+    }
+
+    default String getLocation() {
+        Location location = getPropertyAccessor().getLocation();
+        return location != null ? EmojiProvider.getEmoji("location") + " "
+                + location.getValue() : "";
+    }
+
+}

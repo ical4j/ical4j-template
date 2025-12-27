@@ -46,11 +46,20 @@ public interface RecurrenceView<T extends Component, R extends RecurrenceSupport
 
     Period<Temporal> getPeriod();
 
-    default List<String> getOccurrences(ViewFactory<T> viewFactory) {
+    default <E> List<String> getOccurrences(ViewFactory<T, E> viewFactory) {
         Period<Temporal> period = getPeriod();
         if (period != null) {
             List<T> occurrences = getRecurrenceSupport().getOccurrences(getPeriod());
             return occurrences.stream().map(o -> viewFactory.createView(o).toString()).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+
+    default <E extends DateTimePropertyView<?>> List<String> getOccurrencesStart(ViewFactory<T, E> viewFactory) {
+        Period<Temporal> period = getPeriod();
+        if (period != null) {
+            List<T> occurrences = getRecurrenceSupport().getOccurrences(getPeriod());
+            return occurrences.stream().map(o -> viewFactory.createView(o).getStart()).collect(Collectors.toList());
         }
         return Collections.emptyList();
     }

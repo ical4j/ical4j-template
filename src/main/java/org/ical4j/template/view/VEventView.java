@@ -70,17 +70,17 @@ public class VEventView extends AbstractComponentView implements DescriptiveProp
         }
 
         if (getPeriod() != null) {
-            value += "Occurrences: " + String.join(", ", getOccurrences(VEventViewFactory.INSTANCE)) + "\n";
+            value += "Occurrences: " + String.join(", ", getOccurrencesStart(VEventViewFactory.INSTANCE)) + "\n";
         }
         return value;
     }
 
-    public static class VEventViewFactory implements ViewFactory<VEvent> {
+    public static class VEventViewFactory implements ViewFactory<VEvent, VEventView> {
 
         public static final VEventViewFactory INSTANCE = new VEventViewFactory();
 
         @Override
-        public Object createView(VEvent model) {
+        public VEventView createView(VEvent model) {
             return new VEventView(model);
         }
     }

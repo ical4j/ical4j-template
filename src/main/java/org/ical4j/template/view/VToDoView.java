@@ -69,7 +69,7 @@ public class VToDoView extends AbstractComponentView implements DescriptivePrope
                "Percent Complete: " + getPercentComplete();
     }
 
-    public static class VToDoViewFactory implements ViewFactory<VToDo> {
+    public static class VToDoViewFactory implements ViewFactory<VToDo, VToDoView> {
 
         public static final VToDoViewFactory INSTANCE = new VToDoViewFactory();
 

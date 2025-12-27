@@ -96,7 +96,7 @@ public class AvailableView extends AbstractComponentView implements DescriptiveP
                 "End: " + getEnd() + "\n";
     }
 
-    public static class AvailableViewFactory implements ViewFactory<Available> {
+    public static class AvailableViewFactory implements ViewFactory<Available, AvailableView> {
 
         public static final AvailableViewFactory INSTANCE = new AvailableViewFactory();
 

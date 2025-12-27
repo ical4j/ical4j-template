@@ -1,9 +1,6 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.component.VAvailability;
-
-import java.time.ZoneId;
-import java.util.List;
+import net.fortuna.ical4j.model.component.VResource;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -36,41 +33,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class VAvailabilityView implements DescriptivePropertyView<VAvailability>,
-    DateTimePropertyView<VAvailability> {
+public class VResourceView {
 
-    private final VAvailability availability;
+    private final VResource resource;
 
-    private final ZoneId zoneId;
-
-    public VAvailabilityView(VAvailability availability) {
-        this(availability, ZoneId.systemDefault());
-    }
-
-    public VAvailabilityView(VAvailability availability, ZoneId zoneId) {
-        this.availability = availability;
-        this.zoneId = zoneId;
-    }
-
-    @Override
-    public ZoneId getZoneId() {
-        return zoneId;
-    }
-
-    @Override
-    public VAvailability getPropertyAccessor() {
-        return availability;
-    }
-
-    public List<AvailableView> getAvailablePeriods() {
-        return availability.getAvailable().stream().map(AvailableView::new).toList();
-    }
-
-    @Override
-    public String toString() {
-        return "Summary: " + getSummary() + "\n" +
-               "Start: " + getStart() + "\n" +
-               "End: " + getEnd() + "\n" +
-               "Available Periods: " + getAvailablePeriods().stream().map(AvailableView::toString).toList();
+    public VResourceView(VResource resource) {
+        this.resource = resource;
     }
 }

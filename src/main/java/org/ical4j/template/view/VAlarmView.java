@@ -1,15 +1,6 @@
 package org.ical4j.template.view;
 
-import net.fortuna.ical4j.model.Parameter;
-import net.fortuna.ical4j.model.parameter.LinkRel;
-import net.fortuna.ical4j.model.property.*;
-import org.ical4j.template.util.EmojiProvider;
-
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.time.temporal.Temporal;
-import java.util.Objects;
+import net.fortuna.ical4j.model.component.VAlarm;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -42,21 +33,11 @@ import java.util.Objects;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class AbstractComponentView {
+public class VAlarmView {
 
-    protected String getSafeString(String value) {
-        return Objects.requireNonNullElse(value, "");
-    }
+    private final VAlarm alarm;
 
-    protected String getConceptString(Concept concept) {
-        return concept != null ? EmojiProvider.getEmoji(concept.getValue()) + " " + concept.getValue() : "";
-    }
-
-    protected String getLinkString(Link link) {
-        if (link != null) {
-            LinkRel linkRelation = link.getRequiredParameter(Parameter.RELTYPE);
-            return EmojiProvider.getEmoji(linkRelation.getLinkRelationType().toString()) + " " + link.getValue();
-        }
-        return "";
+    public VAlarmView(VAlarm alarm) {
+        this.alarm = alarm;
     }
 }

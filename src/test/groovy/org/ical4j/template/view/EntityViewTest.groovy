@@ -1,6 +1,8 @@
 package org.ical4j.template.view
 
+import gg.jte.output.StringOutput
 import net.fortuna.ical4j.vcard.VCardBuilder
+import org.ical4j.template.TemplateEngineFactory
 import spock.lang.Specification
 
 /*
@@ -47,6 +49,48 @@ class EntityViewTest extends Specification {
 📞 +44 20 7123 4567
 📞 +44 7700 900123
 📧 joe.bloggs@example.com
+🔗 https://www.joebloggs.example.com
+📝 Fictitious contact created for demonstration purposes
+👑 Senior Consultant
+🏢 Bloggs & Associates
+'''
+    }
+
+    def 'test individual template rendering'() {
+        given: 'an entity view'
+        def view = new EntityView(new VCardBuilder(getClass().getResource('/samples/claude-joebloggs.vcf')
+                .newReader()).build().entities[0])
+
+        and: 'an individual template'
+        def engine = new TemplateEngineFactory().newInstance()
+
+        expect: 'the output is as expected'
+        def output = new StringOutput()
+        engine.render('entity/individual.jte', [entity: view], output)
+
+        output.toString() == '''
+<h1>Joe Bloggs</h1>
+
+
+<p>
+    
+        <strong>Title:</strong> 👑 Senior Consultant<br/>
+    
+    
+        <strong>Organization:</strong> 🏢 Bloggs & Associates<br/>
+    
+    
+        <strong>Email:</strong> <a href="mailto:joe.bloggs@example.com">📧 joe.bloggs@example.com</a><br/>
+    
+    
+        <strong>Phone:</strong> <a href="tel:+44 20 7123 4567">📞 +44 20 7123 4567</a><br/>
+    
+        <strong>Phone:</strong> <a href="tel:+44 7700 900123">📞 +44 7700 900123</a><br/>
+    
+    
+        <strong>URL:</strong> <a href="https://www.joebloggs.example.com">🔗 https://www.joebloggs.example.com</a><br/>
+    
+</p>
 '''
     }
 }

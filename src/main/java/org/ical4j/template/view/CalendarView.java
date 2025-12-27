@@ -1,9 +1,12 @@
 package org.ical4j.template.view;
 
 import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Period;
 import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.component.CalendarComponent;
+import net.fortuna.ical4j.model.component.VEvent;
 
+import java.time.temporal.Temporal;
+import java.util.Collection;
 import java.util.List;
 
 public class CalendarView {
@@ -23,10 +26,15 @@ public class CalendarView {
         }
     }
 
-    public List<String> getEvents() {
-        List<CalendarComponent> events = calendar.getComponents("VEVENT");
-        return events.stream().map(e ->
-                new VEventView((net.fortuna.ical4j.model.component.VEvent) e, null).toString()).toList();
+    public List<VEventView> getEvents(Period<Temporal> period) {
+        List<VEvent> events = calendar.getComponents("VEVENT");
+        if (period != null) {
+            return events.stream().map(e -> e.getOccurrences(period)).flatMap(Collection::stream)
+                    .filter(e -> period.includes(e.getDateTimeStart().getDate()))
+                    .map(e -> new VEventView(e, null)).toList();
+        } else {
+            return events.stream().map(e -> new VEventView(e, null)).toList();
+        }
     }
 
     public String toString() {
@@ -35,8 +43,8 @@ public class CalendarView {
             sb.append("Calendar Name: ").append(getName()).append("\n");
         }
         sb.append("Events:\n");
-        for (String eventStr : getEvents()) {
-            sb.append(eventStr).append("\n");
+        for (VEventView event : getEvents(null)) {
+            sb.append(event.toString()).append("\n");
         }
         return sb.toString();
     }

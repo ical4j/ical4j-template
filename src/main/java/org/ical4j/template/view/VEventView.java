@@ -6,8 +6,9 @@ import net.fortuna.ical4j.model.component.VEvent;
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
 
-public class VEventView extends AbstractComponentView implements DescriptivePropertyView<VEvent>,
-    DateTimePropertyView<VEvent>, RecurrenceView<VEvent, VEvent> {
+public class VEventView implements DescriptivePropertyView<VEvent>,
+    DateTimePropertyView<VEvent>, RelationshipPropertyView<VEvent>, RecurrenceView<VEvent, VEvent>, AlarmsView<VEvent>,
+        ParticipantsView<VEvent>, LocationsView<VEvent>, ResourcesView<VEvent> {
 
     private final VEvent event;
 
@@ -48,6 +49,11 @@ public class VEventView extends AbstractComponentView implements DescriptiveProp
 
     @Override
     public VEvent getRecurrenceSupport() {
+        return event;
+    }
+
+    @Override
+    public VEvent getComponentAccessor() {
         return event;
     }
 

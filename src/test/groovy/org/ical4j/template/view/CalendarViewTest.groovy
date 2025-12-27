@@ -1,12 +1,16 @@
 package org.ical4j.template.view
 
+import gg.jte.output.StringOutput
 import net.fortuna.ical4j.data.CalendarBuilder
 import net.fortuna.ical4j.data.CalendarParserFactory
 import net.fortuna.ical4j.data.UnfoldingReader
 import net.fortuna.ical4j.extensions.data.ExtendedContentHandler
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory
 import net.fortuna.ical4j.util.Calendars
+import org.ical4j.template.TemplateEngineFactory
 import spock.lang.Specification
+
+import java.time.YearMonth
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -511,6 +515,25 @@ Start: 🕑 22 Aug 2026, 2:00:00 am
 End: 🕟 22 Aug 2026, 4:30:00 am
 Location: 📍 Marvel Stadium
 
+'''
+    }
+
+    def 'test calendar view monthly template rendering'() {
+        given: 'a calendar'
+        def calendar = Calendars.load(getClass().getResource('/samples/2026-multifaith-calendar-Victoria.ics'))
+
+        and: 'a calendar view'
+        def calendarView = new CalendarView(calendar)
+
+        and: 'a monthly calendar template'
+        def engine = new TemplateEngineFactory().newInstance()
+        def month = YearMonth.of(2026, 1)
+
+        expect: 'the output is as expected'
+        def output = new StringOutput()
+        engine.render('calendar/monthly.jte', [calendar: calendarView, month: month], output)
+
+        output.toString() == '''
 '''
     }
 }

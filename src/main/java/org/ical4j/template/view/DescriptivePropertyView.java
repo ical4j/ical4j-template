@@ -102,4 +102,8 @@ public interface DescriptivePropertyView<T extends DescriptivePropertyAccessor> 
                 + location.getValue() : "";
     }
 
+    default String getConcept() {
+        Concept concept = getPropertyAccessor().getConcept();
+        return concept != null ? EmojiProvider.getEmoji(concept.getValue()) + " " + concept.getValue() : "";
+    }
 }

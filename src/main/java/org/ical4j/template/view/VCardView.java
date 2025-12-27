@@ -2,6 +2,7 @@ package org.ical4j.template.view;
 
 import net.fortuna.ical4j.vcard.VCard;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /*
@@ -43,8 +44,12 @@ public class VCardView {
         this.vCard = vCard;
     }
 
+    public List<EntityView> getEntities() {
+        return vCard.getEntities().stream().map(EntityView::new).collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
-        return vCard.getEntities().stream().map(e -> new EntityView(e).toString()).collect(Collectors.joining());
+        return getEntities().stream().map(EntityView::toString).collect(Collectors.joining());
     }
 }

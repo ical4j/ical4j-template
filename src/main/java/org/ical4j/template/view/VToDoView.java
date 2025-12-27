@@ -6,8 +6,8 @@ import net.fortuna.ical4j.model.component.VToDo;
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
 
-public class VToDoView extends AbstractComponentView implements DescriptivePropertyView<VToDo>,
-    DateTimePropertyView<VToDo>, RecurrenceView<VToDo, VToDo> {
+public class VToDoView implements DescriptivePropertyView<VToDo>,
+    DateTimePropertyView<VToDo>, RelationshipPropertyView<VToDo>, RecurrenceView<VToDo, VToDo>, AlarmsView<VToDo> {
 
     private final VToDo todo;
 
@@ -57,6 +57,11 @@ public class VToDoView extends AbstractComponentView implements DescriptivePrope
             return new Period<>(periodStart, periodEnd);
         }
         return null;
+    }
+
+    @Override
+    public VToDo getComponentAccessor() {
+        return todo;
     }
 
     @Override

@@ -31,7 +31,7 @@ java {
 }
 
 dependencies {
-    api libs.ical4j, libs.ical4j.vcard, libs.ical4j.extensions, libs.ical4j.connector.api
+    api libs.ical4j, libs.ical4j.vcard
 
 //    implementation "com.j2html:j2html:$j2htmlVersion"
     implementation libs.jte

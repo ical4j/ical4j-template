@@ -46,6 +46,11 @@ import java.util.Optional;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over date-time properties.
+ *
+ * @param <T> the type of date-time property accessor
+ */
 public interface DateTimePropertyView<T extends DateTimePropertyAccessor> {
 
     T getPropertyAccessor();

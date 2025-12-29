@@ -39,6 +39,11 @@ import java.util.Objects;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over a {@link DescriptivePropertyAccessor} providing descriptive information.
+ *
+ * @param <T> the type of descriptive property accessor
+ */
 public interface DescriptivePropertyView<T extends DescriptivePropertyAccessor> {
 
     T getPropertyAccessor();

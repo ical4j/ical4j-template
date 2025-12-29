@@ -3,6 +3,9 @@ package org.ical4j.template.view;
 import net.fortuna.ical4j.vcard.Entity;
 import org.ical4j.template.util.EmojiProvider;
 
+/**
+ * EntityView provides a view over a vCard Entity.
+ */
 public class EntityView implements CommunicationsPropertyView<Entity>, ExplanatoryPropertyView<Entity>,
     GeneralPropertyView<Entity>, IdentificationPropertyView<Entity>, OrganizationalPropertyView<Entity> {
 

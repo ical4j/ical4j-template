@@ -9,6 +9,10 @@ import java.time.temporal.Temporal;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * CalendarView provides a view over an iCalendar Calendar object,
+ * allowing access to its name and events within a specified period.
+ */
 public class CalendarView {
 
     private final Calendar calendar;

@@ -35,6 +35,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view providing access to alarms.
+ *
+ * @param <T> the type of component accessor
+ */
 public interface AlarmsView<T extends AlarmsAccessor> {
 
     T getComponentAccessor();

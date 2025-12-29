@@ -37,6 +37,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over an explanatory property accessor.
+ *
+ * @param <T> the type of explanatory property accessor
+ */
 public interface ExplanatoryPropertyView<T extends ExplanatoryPropertyAccessor> {
 
     T getPropertyAccessor();

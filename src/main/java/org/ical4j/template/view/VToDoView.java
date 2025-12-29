@@ -6,6 +6,10 @@ import net.fortuna.ical4j.model.component.VToDo;
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
 
+/**
+ * VToDoView provides a view over an iCalendar VToDo component,
+ * allowing access to its properties within a specified period and time zone.
+ */
 public class VToDoView implements DescriptivePropertyView<VToDo>,
     DateTimePropertyView<VToDo>, RelationshipPropertyView<VToDo>, RecurrenceView<VToDo, VToDo>, AlarmsView<VToDo> {
 

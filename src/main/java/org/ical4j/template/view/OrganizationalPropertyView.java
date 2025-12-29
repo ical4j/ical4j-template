@@ -37,6 +37,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over organizational properties.
+ *
+ * @param <T> the type of organizational property accessor
+ */
 public interface OrganizationalPropertyView<T extends OrganizationalPropertyAccessor> {
 
     T getPropertyAccessor();

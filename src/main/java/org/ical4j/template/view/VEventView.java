@@ -6,6 +6,10 @@ import net.fortuna.ical4j.model.component.VEvent;
 import java.time.ZoneId;
 import java.time.temporal.Temporal;
 
+/**
+ * VEventView provides a view over an iCalendar VEvent component,
+ * allowing access to its properties within a specified period and time zone.
+ */
 public class VEventView implements DescriptivePropertyView<VEvent>,
     DateTimePropertyView<VEvent>, RelationshipPropertyView<VEvent>, RecurrenceView<VEvent, VEvent>, AlarmsView<VEvent>,
         ParticipantsView<VEvent>, LocationsView<VEvent>, ResourcesView<VEvent> {

@@ -35,6 +35,11 @@ import java.time.ZoneId;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view providing access to change management properties.
+ *
+ * @param <T> the type of change management property accessor
+ */
 public interface ChangeManagementPropertyView<T extends ChangeManagementPropertyAccessor> {
 
     T getPropertyAccessor();

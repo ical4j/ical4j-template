@@ -36,6 +36,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over an identification property accessor.
+ *
+ * @param <T> the type of identification property accessor
+ */
 public interface IdentificationPropertyView<T extends IdentificationPropertyAccessor> {
 
     T getPropertyAccessor();

@@ -31,6 +31,12 @@ package org.ical4j.template.view;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/**
+ * A factory for creating views over a model.
+ * @param <T>
+ * @param <R>
+ */
 public interface ViewFactory<T, R> {
 
     R createView(T model);

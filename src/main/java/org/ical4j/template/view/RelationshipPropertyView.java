@@ -39,6 +39,11 @@ import java.util.stream.Collectors;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/**
+ * A view providing access to relationship properties.
+ * @param <T>
+ */
 public interface RelationshipPropertyView<T extends RelationshipPropertyAccessor> {
 
     T getPropertyAccessor();

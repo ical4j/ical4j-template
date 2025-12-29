@@ -35,6 +35,11 @@ import org.ical4j.template.util.EmojiProvider;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view over general vCard properties.
+ *
+ * @param <T> the type of general property accessor
+ */
 public interface GeneralPropertyView<T extends GeneralPropertyAccessor> {
 
     T getPropertyAccessor();

@@ -40,6 +40,12 @@ import java.util.stream.Collectors;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view providing access to recurrence information for a component.
+ *
+ * @param <T> the component type
+ * @param <R> the recurrence support type
+ */
 public interface RecurrenceView<T extends Component, R extends RecurrenceSupport<T>> {
 
     R getRecurrenceSupport();

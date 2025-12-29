@@ -35,6 +35,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view providing access to locations.
+ *
+ * @param <T> the type of component accessor
+ */
 public interface LocationsView<T extends LocationsAccessor> {
 
     T getComponentAccessor();

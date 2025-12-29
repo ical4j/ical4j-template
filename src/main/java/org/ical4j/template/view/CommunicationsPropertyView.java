@@ -37,6 +37,11 @@ import java.util.List;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+/**
+ * A view providing access to communications properties.
+ *
+ * @param <T> the type of communications property accessor
+ */
 public interface CommunicationsPropertyView<T extends CommunicationsPropertyAccessor> {
 
     T getPropertyAccessor();

@@ -33,6 +33,10 @@ import net.fortuna.ical4j.model.component.VAlarm;
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+/**
+ * A view providing access to a VAlarm.
+ */
 public class VAlarmView {
 
     private final VAlarm alarm;

@@ -3,6 +3,8 @@
 @import java.time.YearMonth
 @import java.time.format.DateTimeFormatter
 @import org.ical4j.template.util.DateUtils
+@import org.ical4j.template.util.CssUtils
+@import java.util.Base64
 
 @param CalendarView calendar
 @param YearMonth month
@@ -10,7 +12,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="data:text/css;base64,${Base64.getEncoder().encodeToString(CssUtils.getCalendarCss())}" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${calendar.getName()}</title>

@@ -6,6 +6,7 @@ module ical4j.template {
     requires gg.jte.runtime;
     requires gg.jte;
     requires ical4j.connector.api;
+    requires org.slf4j;
 
     exports org.ical4j.template;
 }

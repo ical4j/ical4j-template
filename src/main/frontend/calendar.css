@@ -1,0 +1,4 @@
+@import "tailwindcss" source("../resources/templates/calendar");
+
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";

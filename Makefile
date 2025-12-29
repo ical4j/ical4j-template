@@ -3,7 +3,7 @@ include .env
 
 NEXT_VERSION=$(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
-.PHONY: all gradlew clean check build currentVersion markNextVersion \
+.PHONY: all gradlew clean node check build currentVersion markNextVersion \
 	verify release publish
 
 all: check
@@ -14,7 +14,10 @@ gradlew:
 clean:
 	./gradlew clean
 
-check:
+node:
+	./gradlew npm_run_build
+
+check: node
 	./gradlew check
 
 test:

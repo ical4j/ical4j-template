@@ -4,6 +4,7 @@ import net.fortuna.ical4j.model.component.VAvailability;
 
 import java.time.ZoneId;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * Copyright (c) 2025, Ben Fortuna
@@ -75,6 +76,6 @@ public class VAvailabilityView implements DescriptivePropertyView<VAvailability>
         return "Summary: " + getSummary() + "\n" +
                "Start: " + getStart() + "\n" +
                "End: " + getEnd() + "\n" +
-               "Available Periods: " + getAvailablePeriods().stream().map(AvailableView::toString).toList();
+               "Available Periods: " + getAvailablePeriods().stream().map(AvailableView::toString).collect(Collectors.joining());
     }
 }

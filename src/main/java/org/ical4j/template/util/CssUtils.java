@@ -40,7 +40,7 @@ public interface CssUtils {
 
     static byte[] getCalendarCss() {
         try {
-            return Objects.requireNonNull(CssUtils.class.getResourceAsStream("/public/calendar.css")).readAllBytes();
+            return Objects.requireNonNull(CssUtils.class.getResourceAsStream("/public/css/ical4j-calendar.css")).readAllBytes();
         } catch (IOException e) {
             LoggerFactory.getLogger(CssUtils.class).error(e.getMessage());
         }

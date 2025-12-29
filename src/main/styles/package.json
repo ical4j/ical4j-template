@@ -1,0 +1,30 @@
+{
+  "name": "ical4j-template",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "build": "npm run build-main && npm run build-available && npm run build-calendar && npm run build-entity && npm run build-vavailability && npm run build-vcard && npm run build-vevent && npm run build-vfreebusy && npm run build-vjournal && npm run build-vlocation && npm run build-vresource && npm run build-vstatus && npm run build-vtodo",
+    "build-main": "npx @tailwindcss/cli -i ./main.css -o ../resources/public/css/ical4j.css",
+    "build-available": "npx @tailwindcss/cli -i ./available.css -o ../resources/public/css/ical4j-available.css",
+    "build-calendar": "npx @tailwindcss/cli -i ./calendar.css -o ../resources/public/css/ical4j-calendar.css",
+    "build-entity": "npx @tailwindcss/cli -i ./entity.css -o ../resources/public/css/ical4j-entity.css",
+    "build-vavailability": "npx @tailwindcss/cli -i ./vavailability.css -o ../resources/public/css/ical4j-vavailability.css",
+    "build-vcard": "npx @tailwindcss/cli -i ./vcard.css -o ../resources/public/css/ical4j-vcard.css",
+    "build-vevent": "npx @tailwindcss/cli -i ./vevent.css -o ../resources/public/css/ical4j-vevent.css",
+    "build-vfreebusy": "npx @tailwindcss/cli -i ./vfreebusy.css -o ../resources/public/css/ical4j-vfreebusy.css",
+    "build-vjournal": "npx @tailwindcss/cli -i ./vjournal.css -o ../resources/public/css/ical4j-vjournal.css",
+    "build-vlocation": "npx @tailwindcss/cli -i ./vlocation.css -o ../resources/public/css/ical4j-vlocation.css",
+    "build-vresource": "npx @tailwindcss/cli -i ./vresource.css -o ../resources/public/css/ical4j-vresource.css",
+    "build-vstatus": "npx @tailwindcss/cli -i ./vstatus.css -o ../resources/public/css/ical4j-vstatus.css",
+    "build-vtodo": "npx @tailwindcss/cli -i ./vtodo.css -o ../resources/public/css/ical4j-vtodo.css"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.6",
+    "tailwindcss": "^4.0.6"
+  },
+  "dependencies": {
+    "flowbite": "^3.1.2",
+    "minimal-request-promise": "^1.5.0",
+    "tree-kill": "^1.2.2"
+  }
+}

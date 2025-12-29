@@ -1,73 +1,36 @@
 # iCal4j Templates
 
-iCalendar templates for common use-cases
+This library builds on the models provided by iCal4j to support rendering of iCalendar and vCard objects using
+template views.
 
-## Overview
+The library includes a collection of predefined Views and Templates that can be used to render iCalendar and
+vCard objects in different formats.
 
-iCal4j Templates is designed to make the iCalendar specifications more accessible by providing a
-discoverable API for common applications. For example, a simple meeting or task may not require the full
-functionality provided by iCalendar, but you still need to understand it in order to
-produce valid content.
+## Views
 
-This library aims to make it easier to construct valid iCalendar content without needing to read the
-specifications in full.
+iCal4j Views are classes that support rendering iCalendar and vCard objects as text. Views provide accessor methods
+that return string representations of relevant properties for the underlying iCalendar or vCard object.
 
-Templates includes in this library are used to create or modify iCalendar objects. 
+Views may be used directly, or as part of a Template rendering process.
 
-### Domains
+Common traits of Views:
 
-Template domains are simply a grouping of related templates that may be applied to a specific problem domain.
-Currently, the supported domains include:
-
-* Groupware - support for collaborative applications
-* Project - Project management
-* Agile - agile management processes
-* Workflow - Work management
-* Catalog - develop a service catalog
-* Wiki - knowledge management
+* Return values for accessor methods are either string literals, or collections of string literals or other Views
+* No complex objects are returned (e.g. Date, URI, etc.)
+* Views are read-only representations of the underlying iCalendar or vCard object
 
 
-## Groupware
+## Templates
 
-Support collaborative features such as calendar and task management, scheduling appointments
-and meetings, as well as journaling and note-taking.
+iCal4j Templates are implemented using JTE syntax, and provide different rendering options for iCalendar and
+vCard views. Template input parameters are typically iCal4j Views, although other parameters may be used as needed.
 
-### Meeting
+Most templates will render as HTML, but other formats may be supported as needed.
 
-Meetings are scheduled with two or more participants, and may be created as follows:
-
-```java
-VEvent meeting = new Meeting().start(ZonedDateTime.of(...))
-    .required(URI.create("mailto:joe@example.com")).required(URI.create("mailto:sally@example.com"))
-    .optional(URI.create("mailto:fred@example.com"))
-    .chair(URI.create("mailto:vanessa@example.com")).apply();
-```
+HTML templates use Tailwind CSS for styling. The CSS files are embedded in page template output for simplicity, but
+for fragment templates you will need to include the Tailwind CSS file in your application separately.
 
 
-## Project
-
-TBD.
-
-
-## Agile
-
-TBD.
-
-
-## Workflow
-
-Journal your workflows and deliverables as you work. Build a relational graph of people, teams, outputs
-and dependencies.
-
-
-## Catalog
-
-Maintain a graph of customer and vendor relationships. Track offers and orders, and monitor customer satisfaction.
-
-
-## Wiki
-
-TBD.
 
 
 <!--

@@ -34,6 +34,7 @@ java {
 node {
     nodeProjectDir = file("${project.projectDir}/src/main/styles")
 }
+build.dependsOn('npm_run_build')
 
 dependencies {
     api libs.ical4j, libs.ical4j.vcard

@@ -17,7 +17,7 @@ clean:
 node:
 	./gradlew npm_run_build
 
-check: node
+check:
 	./gradlew check
 
 test:

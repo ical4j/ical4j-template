@@ -63,6 +63,7 @@ public class EmojiProvider {
             case "display" -> "\uD83D\uDDA5\uFE0F"; // Notification Display 🖥️
             case "email" -> "\uD83D\uDCE7"; // E-mail 📧
 
+            // time emojis
             case "0", "00", "12" -> "\uD83D\uDD5B"; // 12 o'clock 🕛
             case "1", "01", "13" -> "\uD83D\uDD50"; // 1 o'clock 🕐
             case "2", "02", "14" -> "\uD83D\uDD51"; // 2 o'clock 🕑
@@ -105,6 +106,9 @@ public class EmojiProvider {
             case "fax" -> "\uD83D\uDCE0"; // Fax Machine 📠
             case "pager" -> "\uD83D\uDCDF"; // Pager 📟
             case "url" -> "\uD83D\uDD17"; // Link 🔗
+
+            case "note" -> "\uD83D\uDCDD"; // Memo 📝
+            case "title" -> "\uD83D\uDC51"; // Crown 👑
 
             default -> "";
         };

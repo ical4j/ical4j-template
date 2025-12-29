@@ -66,6 +66,11 @@ public interface DateTimePropertyView<T extends DateTimePropertyAccessor> {
         }
     }
 
+    default String getStart(DateTimeFormatter formatter) {
+        DtStart<?> dtStart = getPropertyAccessor().getDateTimeStart();
+        return formatter.format(Objects.requireNonNull(dtStart).getDate());
+    }
+
     default String getEnd() {
         DtEnd<?> dtEnd = getPropertyAccessor().getDateTimeEnd();
         if (Optional.of(Value.DATE).equals(dtEnd.getParameter(Parameter.VALUE))) {

@@ -3,6 +3,7 @@ package org.ical4j.template.util;
 import net.fortuna.ical4j.model.Period;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.Temporal;
 import java.util.List;
 
@@ -46,5 +47,16 @@ public interface DateUtils {
 
     static Period<Temporal> getPeriod(LocalDate date) {
         return new Period<>(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+    }
+
+    static Period<Temporal> getPeriod(int year) {
+        return new Period<>(LocalDate.of(year, 1, 1).atStartOfDay(),
+                LocalDate.of(year + 1, 1, 1).atStartOfDay());
+    }
+
+    static Period<Temporal> getPeriod(int year, Month month) {
+        LocalDate startOfMonth = LocalDate.of(year, month, 1);
+        return new Period<>(startOfMonth.atStartOfDay(),
+                startOfMonth.plusMonths(1).atStartOfDay());
     }
 }

@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew check --console=plain --warning-mode all
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-artifact
           path: build/reports/tests

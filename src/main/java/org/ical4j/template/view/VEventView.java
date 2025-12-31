@@ -80,14 +80,14 @@ public class VEventView implements DescriptivePropertyView<VEvent>,
         }
 
         if (getPeriod() != null) {
-            value += "Occurrences: " + String.join(", ", getOccurrencesStart(VEventViewFactory.INSTANCE)) + "\n";
+            value += "Occurrences: " + String.join(", ", getOccurrencesStart(Factory.INSTANCE)) + "\n";
         }
         return value;
     }
 
-    public static class VEventViewFactory implements ViewFactory<VEvent, VEventView> {
+    public static class Factory implements ViewFactory<VEvent, VEventView> {
 
-        public static final VEventViewFactory INSTANCE = new VEventViewFactory();
+        public static final Factory INSTANCE = new Factory();
 
         @Override
         public VEventView createView(VEvent model) {

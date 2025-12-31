@@ -78,9 +78,9 @@ public class VToDoView implements DescriptivePropertyView<VToDo>,
                "Percent Complete: " + getPercentComplete();
     }
 
-    public static class VToDoViewFactory implements ViewFactory<VToDo, VToDoView> {
+    public static class Factory implements ViewFactory<VToDo, VToDoView> {
 
-        public static final VToDoViewFactory INSTANCE = new VToDoViewFactory();
+        public static final Factory INSTANCE = new Factory();
 
         @Override
         public VToDoView createView(VToDo model) {

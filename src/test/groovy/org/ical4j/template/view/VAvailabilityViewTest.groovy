@@ -56,11 +56,11 @@ class VAvailabilityViewTest extends Specification {
 
         expect: 'the output is as expected'
         view.toString() == '''Summary: Available
-Start: 🕘 1 June 2024, 7:00:00 pm
-End: 🕔 2 June 2024, 3:00:00 am
+Start: 🕘 1 June 2024, 9:00:00 am
+End: 🕔 1 June 2024, 5:00:00 pm
 Available Periods: Available: Available
-Start: 🕘 1 June 2024, 7:00:00 pm
-End: 🕔 2 June 2024, 3:00:00 am
+Start: 🕘 1 June 2024, 9:00:00 am
+End: 🕔 1 June 2024, 5:00:00 pm
 '''
     }
 }

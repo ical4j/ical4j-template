@@ -61,7 +61,7 @@ test {
     useJUnitPlatform()
 
     finalizedBy jacocoTestCoverageVerification, jacocoTestReport // Ensure Jacoco is run after tests have completed
-    jvmArgs = [ "-Duser.timezone=Australia/Melbourne" ] // Set timezone for consistent rendering results
+    jvmArgs = [ "-Duser.timezone=UTC" ] // Set timezone for consistent rendering results
 }
 
 jacocoTestCoverageVerification {

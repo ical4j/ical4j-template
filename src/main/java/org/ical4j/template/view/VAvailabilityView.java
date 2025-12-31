@@ -76,6 +76,7 @@ public class VAvailabilityView implements DescriptivePropertyView<VAvailability>
         return "Summary: " + getSummary() + "\n" +
                "Start: " + getStart() + "\n" +
                "End: " + getEnd() + "\n" +
-               "Available Periods: " + getAvailablePeriods().stream().map(AvailableView::toString).collect(Collectors.joining());
+               "Available Periods: " + getAvailablePeriods().stream().map(AvailableView::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

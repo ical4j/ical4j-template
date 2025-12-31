@@ -1,6 +1,7 @@
 package org.ical4j.template.view
 
 import net.fortuna.ical4j.model.ContentBuilder
+import net.fortuna.ical4j.model.component.VAvailability
 import spock.lang.Specification
 
 /*
@@ -39,7 +40,7 @@ class VAvailabilityViewTest extends Specification {
 
     def 'test vAvailability view rendering'() {
         given: 'a vAvailability instance'
-        def vAvailability = new ContentBuilder().vavailability {
+        VAvailability vAvailability = new ContentBuilder().vavailability {
             uid('12345')
             summary('Available')
             dtstart('20240601T090000Z')
